@@ -1,18 +1,20 @@
 #ifndef TIGRE_H
 #define TIGRE_H
 
-#include "zoo.h"
+#include "Animal.h"
 #include <iostream>
 #include <string>
 
 
 using namespace std;
 
-class Tigre {
+class Tigre:public Animal {
+    private:
+        /* data */
     public:
-        Tigre();
-        Tigre(string name);
-
+        Tigre(/* args */);
+        ~Tigre();
 };
+
 
 #endif // TIGRE_H

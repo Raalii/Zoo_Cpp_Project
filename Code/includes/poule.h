@@ -2,15 +2,17 @@
 #define POULE_H
 
 #include <iostream>
+#include "Animal.h"
 
 using namespace std;
 
-class poule {
-    protected:
-        /* data */
+class poule:public Animal {
     public:
-        poule(/* args */);
+    // constructor
+        poule();
+    // destructor
         ~poule();
 };
+
 
 #endif

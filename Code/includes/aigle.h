@@ -1,27 +1,19 @@
 #ifndef AIGLE_H
 #define AIGLE_H
 
+#include "zoo.h"
+#include "Animal.h"
 #include <iostream>
 
 using namespace std;
 
-
-class Aigle {
-    private:
-        bool m_gender;
-        int age;    
-    
+class Aigle:public Animal {
     public:
-        Aigle(/* args */);
+        // constructor
+        Aigle();
+        // destructor
         ~Aigle();
 };
 
-Aigle::Aigle(/* args */) {
-
-}
-
-Aigle::~Aigle() {
-
-}
 
 #endif
