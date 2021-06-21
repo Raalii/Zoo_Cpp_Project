@@ -1,5 +1,10 @@
 #include "./includes/zoo.h"
 
+using std::string;
+using std::cout;
+using std::cin;
+using std::endl;
+
 Zoo::Zoo(/* args */)
 {
     

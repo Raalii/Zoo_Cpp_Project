@@ -1,7 +1,7 @@
 /*
-Simulateur de Zoo
+* Simulateur de Zoo
 
-Ce projet consiste à créer un simulateur permettant la gestion d'un zoo en tour par tour. Chaque tour représente 1 mois.
+* Ce projet consiste à créer un simulateur permettant la gestion d'un zoo en tour par tour. Chaque tour représente 1 mois.
 
 Notre simulateur doit mettre en place : 
     - Un scénario avec : 2 couples de tigre, 2 couples d'aigle, 1 coq, 10 poules sur "10 ANS".
@@ -40,6 +40,8 @@ Notre simulateur doit mettre en place :
 int main() {
     Zoo NewGame;
     NewGame.Menu();
+    Aigle v(false, 14);
+    
     // cout << c << endl;
     return 0;
 }

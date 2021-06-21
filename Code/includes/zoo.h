@@ -4,7 +4,6 @@
 #include <iostream>
 #include "budget.h"
 #include <string>
-using namespace std;
 
 class Zoo
 {
@@ -17,7 +16,5 @@ public:
     ~Zoo();
     void Menu();
 };
-
-
 
 #endif

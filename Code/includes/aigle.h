@@ -5,15 +5,17 @@
 #include "Animal.h"
 #include <iostream>
 
-using namespace std;
-
-class Aigle:public Animal {
-    public:
-        // constructor
-        Aigle();
-        // destructor
-        ~Aigle();
+class Aigle :  public Animal
+{
+private:
+    /* data */
+public:
+    Aigle(/* args */);
+    Aigle(bool gender, int age);
+    ~Aigle();
+    float CheckPriceValue();
 };
+
 
 
 #endif

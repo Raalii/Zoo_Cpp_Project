@@ -5,9 +5,6 @@
 #include <iostream>
 #include <string>
 
-
-using namespace std;
-
 class Tigre:public Animal {
     private:
         /* data */

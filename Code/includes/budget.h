@@ -4,7 +4,6 @@
 
 #include <cmath>
 
-using namespace std;
 
 class Budget {
     private:

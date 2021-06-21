@@ -4,8 +4,6 @@
 #include <iostream>
 #include "zoo.h"
 
-using namespace std;
-
 class habitat
 {
 private:
@@ -22,12 +20,5 @@ habitat::habitat(/* args */)
 habitat::~habitat()
 {
 }
-
-
-
-
-
-
-
 
 #endif
