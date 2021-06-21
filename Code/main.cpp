@@ -26,6 +26,11 @@ Notre simulateur doit mettre en place :
 */
 
 #include "./includes/zoo.h"
+#include "./includes/Animal.h"
+#include "./includes/budget.h"
+#include "./includes/aigle.h"
+#include "./includes/poule.h"
+#include "./includes/tigre.h"
 #include <string>
 #include <iostream>
 #include <vector>
@@ -34,5 +39,7 @@ Notre simulateur doit mettre en place :
 
 int main() {
     // DisplayOut();
+
+
     return 0;
 }

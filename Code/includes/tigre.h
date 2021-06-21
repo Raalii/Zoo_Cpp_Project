@@ -2,16 +2,17 @@
 #define TIGRE_H
 
 #include "zoo.h"
+#include <iostream>
 #include <string>
+
 
 using namespace std;
 
 class Tigre {
+    public:
+        Tigre();
+        Tigre(string name);
 
-public:
-    Tigre();
-    Tigre(string name);
-    virtual void fire();
 };
 
 #endif // TIGRE_H

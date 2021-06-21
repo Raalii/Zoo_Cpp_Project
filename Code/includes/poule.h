@@ -5,7 +5,12 @@
 
 using namespace std;
 
-
-
+class poule {
+    protected:
+        /* data */
+    public:
+        poule(/* args */);
+        ~poule();
+};
 
 #endif
