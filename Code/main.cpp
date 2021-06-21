@@ -38,8 +38,8 @@ Notre simulateur doit mettre en place :
 
 
 int main() {
-    // DisplayOut();
-
-
+    // Zoo NewGame;
+    // NewGame.Menu();
+    // cout << c << endl;
     return 0;
 }
