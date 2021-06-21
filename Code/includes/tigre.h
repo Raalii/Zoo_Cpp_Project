@@ -1,8 +1,7 @@
 #ifndef TIGRE_H
 #define TIGRE_H
 
-#include "zoo.hpp"
-
+#include "zoo.h"
 #include <string>
 
 using namespace std;
