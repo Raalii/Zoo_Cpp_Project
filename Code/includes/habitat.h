@@ -94,6 +94,7 @@ float habitat::sell_habitat_animals(Budget Current_Budget) {
         break;
     default:
         break;
+        
     }
 }
 

@@ -79,4 +79,9 @@ void Animal::UpdateState() {
     */
 }
 
+
+void UpdateReproductionState() {
+    
+}
+
 #endif
