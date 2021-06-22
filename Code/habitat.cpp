@@ -6,6 +6,3 @@
 
 // il faut ensuite stocker le nombre d'habitat que l'utilisateur possède
 
-void Budget::buy_habitat_for_animals() {
-
-}
