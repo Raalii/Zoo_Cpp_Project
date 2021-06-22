@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "zoo.h"
-#include "budget.h"
+// #include "int.h"
 
 struct habitat_animals
 {
@@ -14,19 +14,32 @@ struct habitat_animals
 
 class habitat
 {
-protected:
+private:
     habitat_animals m_Habitat;
     int nbr_of_habitats;
 
+    /* 
+    * Type ==> Tigre, Poule, Aigle
+    * Size ==> Différentes (Tigre : 2, Poule : 10, Aigle : 4)
+    * Enfant Tigre ==> Tableau de 4 place de Tigre.
+    */
+
 public:
-    habitat();
+    habitat(/* args */);
     ~habitat();
-    float buy_habitat_for_animals(Budget Current_Budget);
-    float sell_habitat_animals(Budget Current_Budget);
+    float buy_habitat_for_animals(int Current_Budget);
+    float sell_habitat_animals(int Current_Budget);
 };
 
+habitat::habitat(/* args */)
+{
+}
 
-float habitat::buy_habitat_for_animals(Budget Current_Budget)
+habitat::~habitat()
+{
+}
+
+float habitat::buy_habitat_for_animals(int Current_Budget)
 {
     int choice;
     do
@@ -40,28 +53,26 @@ float habitat::buy_habitat_for_animals(Budget Current_Budget)
     case 1: /*Habitat tigre*/
         // alors le nombre habitat tigre +1
         m_Habitat.h_tigre += 1;
-        Current_Budget.Buy_Habitat(2000);
-        nbr_of_habitats +=1;
+        nbr_of_habitats += 1;
         break;
 
     case 2: /*Habitat aigle*/
         // alors le nombre habitat aigle +1
         m_Habitat.h_aigle += 1;
-        Current_Budget.Buy_Habitat(2000);
-        nbr_of_habitats +=1;
+        nbr_of_habitats += 1;
         break;
     case 3: /*Habitat poule*/
         // alors le nombre habitat poule +1
         m_Habitat.h_poule += 1;
-        Current_Budget.Buy_Habitat(300);
-        nbr_of_habitats +=1;
+        nbr_of_habitats += 1;
         break;
     default:
         break;
     }
 }
 
-float habitat::sell_habitat_animals(Budget Current_Budget) {
+float habitat::sell_habitat_animals(int Current_Budget)
+{
     int choice;
 
     do
@@ -77,27 +88,25 @@ float habitat::sell_habitat_animals(Budget Current_Budget) {
         // alors le nombre habitat tigre -1
         m_Habitat.h_tigre -= 1;
         Current_Budget.Sell_Habitat(500);
-        nbr_of_habitats +=1;
+        nbr_of_habitats += 1;
         break;
 
     case 2: /*Habitat aigle*/
         // alors le nombre habitat aigle +1
         m_Habitat.h_aigle += 1;
         Current_Budget.Sell_Habitat(500);
-        nbr_of_habitats +=1;
+        nbr_of_habitats += 1;
         break;
     case 3: /*Habitat poule*/
         // alors le nombre habitat poule +1
         m_Habitat.h_poule += 1;
         Current_Budget.Sell_Habitat(3);
-        nbr_of_habitats +=1;
+        nbr_of_habitats += 1;
         break;
     default:
         break;
     }
 }
-
-
 
 /*
 ==> Action 1 ?
