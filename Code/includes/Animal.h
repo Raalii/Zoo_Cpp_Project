@@ -10,22 +10,23 @@ using std::string;
 struct Malade
 {
     bool Is_Malade = false;
-    int Max_Days = 0; // The Max_Days variable means if the malade period (=days) exceeds the value, the Animals die
+    int Max_Days; // The Max_Days variable means if the malade period (=days) exceeds the value, the Animals die
     int days = 0;
 };
 
 struct Hungry
 {
     bool Is_Hungry = false;
-    int Max_Days = 0; // The Max_Days variable means if the Hungry period (=days) exceeds the value, the Animals die
+    int Max_Days; // The Max_Days variable means if the Hungry period (=days) exceeds the value, the Animals die
     int days = 0;
 };
 
 struct Reproduction
 {
-    bool Can_Reproduce = false;
+    bool Is_Newer; // The animal cannot reproduce the first days after the arrival, that bool check if is New or not.
+    bool Can_Reproduce; // Bool will check if the animal can reproduce 
     bool Is_Reproduction = false;
-    int Reproduction_Duration = 0;
+    int Reproduction_Duration;
     int days = 0;
 };
 
@@ -57,8 +58,25 @@ class Animal
     public:
         Animal();
         Animal(bool gender, int age);
-        // Animal(int v);
+        void UpdateState();
         ~Animal();
 };
+
+
+void Animal::UpdateState() {
+    // Update the State after each turn (1 month)
+    /*
+    * Update the age
+    * Update the Reproduction State
+    * Update 
+    * 
+    * 
+    * 
+    * 
+    * 
+    * 
+    * 
+    */
+}
 
 #endif

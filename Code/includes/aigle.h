@@ -14,6 +14,7 @@ public:
     Aigle(bool gender, int age);
     ~Aigle();
     float CheckPriceValue();
+    // void CheckReproduction();
 };
 
 

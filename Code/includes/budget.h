@@ -14,6 +14,13 @@ class Budget {
         void Add_Money_By_Subvention(int month, int Nbr_Tiger, int Nbr_Eagle);
         void Money_Incomme_By_Visitors(int month, int Nbr_Tiger, int Nbr_Poule, int Nbr_Eagle);
         float Get_Capital();
+        void By_Habitat(int price);
 };
+
+
+
+void Budget::By_Habitat(int price) {
+    m_Capital -= price;
+} ;
 
 #endif
