@@ -87,20 +87,20 @@ float habitat::sell_habitat_animals(int Current_Budget)
     case 1: /*Habitat tigre*/
         // alors le nombre habitat tigre -1
         m_Habitat.h_tigre -= 1;
-        Current_Budget.Sell_Habitat(500);
+        // Current_Budget.Sell_Habitat(500);
         nbr_of_habitats += 1;
         break;
 
     case 2: /*Habitat aigle*/
         // alors le nombre habitat aigle +1
         m_Habitat.h_aigle += 1;
-        Current_Budget.Sell_Habitat(500);
+        // Current_Budget.Sell_Habitat(500);
         nbr_of_habitats += 1;
         break;
     case 3: /*Habitat poule*/
         // alors le nombre habitat poule +1
         m_Habitat.h_poule += 1;
-        Current_Budget.Sell_Habitat(3);
+        // Current_Budget.Sell_Habitat(3);
         nbr_of_habitats += 1;
         break;
     default:
