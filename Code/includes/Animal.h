@@ -2,8 +2,10 @@
 #define ANIMAL_H
 
 #include <string>
-#include <stdlib.h> /* srand, rand */
 #include <iostream>
+// #include <stdlib.h> /* srand, rand */
+#include <ctime>
+#include <random>
 
 using std::string;
 
@@ -16,10 +18,10 @@ struct Malade
 };
 
 struct Hungry
-{
+{   
+    int Days_Without_Food = 0;
     bool Is_Hungry = false;
     int Max_Days; // The Max_Days variable means if the Hungry period (=days) exceeds the value, the Animals die
-    int days = 0;
 };
 
 struct Reproduction
@@ -61,56 +63,20 @@ public:
     Animal(bool gender, int age);
     void UpdateState();
     void Update_Hungry();
-    void Update_Malade();
+    void Update_Malade(bool Is_Surpopulation);
+    bool Update_Reproduction();
+    void Reset_Reproduction();
     void CheckMaladie(int Probability);
     void Eats_Food();
+    void Reset_Hungry();
     bool Can_Reproduce();
+    bool Get_Is_Reproduction();
     string Get_Type_Of_Food();
-    int Get_Food_Quantity();
+    float Get_Food_Quantity();
+    void Update_Age();
 };
 
 
 
-void Animal::CheckMaladie(int Probability)
-{
-    if (rand() % 101 < Probability) // if the random value (0-100) returned are inferior than Probability (=Probability% of chance)
-    {
-        m_State.s_Malade.Is_Malade = true;
-        std::cout << "Votre animal est malade " << std::endl;
-    }
-}
-
-string Animal::Get_Type_Of_Food() {
-    return m_Type_Of_Food;
-}
-
-int Animal::Get_Food_Quantity() {
-    return m_Food_Quantity;
-}   
-
-void Animal::Update_Hungry()
-{
-}
-
-void Animal::UpdateState()
-{
-    // Update the State after each turn (1 month)
-    /*
-    * Update the age
-    * Update the Reproduction State
-    * Update 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    */
-}
-
-void UpdateReproductionState()
-{
-}
 
 #endif

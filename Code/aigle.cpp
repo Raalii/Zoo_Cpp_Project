@@ -35,14 +35,16 @@ Aigle::Aigle(bool gender, int age) : Animal(gender, age)
         // Informations about Age
         m_State.s_Age.Life_Esperance = 300; // = 25 years
         m_State.s_Age.Sexual_Maturity = 48; // = 4 years
-        if (/*la femelle est en gestation*/true)
-        {
-            /* nourriture x2 */
-            m_Food_Quantity = 0.60;
-            /* 2 oeufs en Mars*/
-            /* Gestation 45 jours + Mort Infantile 50% */
-            /* Fin de reproduction 14 ans*/
-        }        
+        // Informations about Maladie
+         m_State.s_Malade.Max_Days = 30;
+        // if (/*la femelle est en gestation*/true)
+        // {
+        //     /* nourriture x2 */
+        //     m_Food_Quantity = 0.60;
+        //     /* 2 oeufs en Mars*/
+        //     /* Gestation 45 jours + Mort Infantile 50% */
+        //     /* Fin de reproduction 14 ans*/
+        // }        
     }
 }
 
@@ -73,4 +75,9 @@ float Aigle::CheckPriceValue()
             return 400.0;
         }
     }
+}
+
+
+int Aigle::Get_ID() {
+    return m_ID;
 }

@@ -8,6 +8,7 @@
 class Zoo
 {
 private:
+    bool running;
     Budget m_Budget;
     float Graine_Quantity = 0;
     float Viande_Quantity = 0;

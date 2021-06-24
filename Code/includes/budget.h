@@ -3,7 +3,7 @@
 #define BUDGET_H
 
 #include <cmath>
-#include "habitat.h"
+// #include "habitat.h"
 
 
 class Budget {
@@ -22,16 +22,5 @@ class Budget {
 
 
 
-void Budget::Buy_Habitat(int price) {
-    m_Capital -= price;
-};
-
-void Budget::Sell_Habitat(int price) {
-    m_Capital += price;
-};
-
-void Budget::Buy_Habitat_For_Animals() {
-
-}
 
 #endif

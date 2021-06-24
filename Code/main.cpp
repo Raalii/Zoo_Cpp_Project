@@ -40,8 +40,17 @@ Notre simulateur doit mettre en place :
 int main() {
     Zoo NewGame;
     NewGame.Menu();
-    Aigle v(false, 14);
+    Aigle v(false, 144);
+    std::cout << v.CheckPriceValue() << std::endl << v.Can_Reproduce() << std::endl;
+    // for (int i = 0; i < 5; i++)
+    // {
+    //     v.Update_Malade(true);
+    //     // std::cout << "hello" << std::endl;
+    // }
+    v.tqt();
     
+    
+
     // cout << c << endl;
     return 0;
 }

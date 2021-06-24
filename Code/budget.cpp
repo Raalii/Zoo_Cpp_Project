@@ -8,6 +8,18 @@ Budget::~Budget(){
 }
 
 
+void Budget::Buy_Habitat(int price) {
+    m_Capital -= price;
+};
+
+void Budget::Sell_Habitat(int price) {
+    m_Capital += price;
+};
+
+void Budget::Buy_Habitat_For_Animals() {
+
+}
+
 void Budget::Add_Money_By_Subvention(int month, int Nbr_Tiger, int Nbr_Eagle)
 {
     if (month == 12) // If the current month are december
