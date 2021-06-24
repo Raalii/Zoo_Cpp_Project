@@ -1,10 +1,5 @@
 #include "./includes/habitat.h"
 
-//il faut le type d'habitat : tigre , aigle, poule
-// il faut le prix par habitat
-
-// il faut ensuite stocker le nombre d'habitat que l'utilisateur possède
-
 // . Habitat : principal class
 
 Habitat::Habitat()
@@ -26,21 +21,33 @@ Eagle_Habitat::~Eagle_Habitat()
 {
 }
 
-void Eagle_Habitat::Delete_Animal(int ID)
+Animal_Sell Eagle_Habitat::Delete_Animal(int ID)
 // Function which will delete an animal in this habitat. That permitte to manage habitat (change, delete...).
 {
+    Animal_Sell Is_Sell;
     for (size_t i = 0; i < m_Current_Habitat.size(); i++)
     {
         if (ID == m_Current_Habitat[i].Get_ID())
-        {
+        {            
+            Is_Sell.Price = m_Current_Habitat[i].CheckPriceValue();
             m_Current_Habitat[i], m_Current_Habitat[m_Current_Habitat.size() - 1] = m_Current_Habitat[m_Current_Habitat.size() - 1], m_Current_Habitat[i];
             m_Current_Habitat.pop_back();
+            Is_Sell.Sell_Check = true;
+            return Is_Sell;
         }
     }
+
+    Is_Sell.Sell_Check = false;
+    Is_Sell.Price = 0;
+    return Is_Sell;
+}
+
+int Eagle_Habitat::Get_ID() {
+    return m_ID;
 }
 
 bool Eagle_Habitat::Add_Animal_In_Habitat(Aigle Current_Animal)
-// Function which will add an animal in this Habitat, return true if the function 
+// Function which will add an animal in this Habitat, return false if is not possible (over-capacity)
 {
     if (m_Current_Habitat.size() < m_Capacity * 2)
     {

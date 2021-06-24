@@ -9,15 +9,17 @@
 class Budget {
     private:
         float m_Capital = 80000;
+        bool m_bankrupt; //Variable for whether user is bankrupt or not
     public:
         Budget();
         ~Budget();
         void Add_Money_By_Subvention(int month, int Nbr_Tiger, int Nbr_Eagle);
         void Money_Incomme_By_Visitors(int month, int Nbr_Tiger, int Nbr_Poule, int Nbr_Eagle);
         float Get_Capital();
-        void Buy_Habitat(int price);
-        void Sell_Habitat(int price); // ! A modifie
-        void Buy_Habitat_For_Animals();
+        bool Get_Bankrupt();
+        void Buy_Something(int price);
+        void Sell_Something(int price); // ! A modifie
+        void Capital_Check();
 };
 
 

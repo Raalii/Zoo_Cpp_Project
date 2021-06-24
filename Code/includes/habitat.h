@@ -10,47 +10,89 @@
 #include <string>
 #include <vector>
 
+
+struct Animal_Sell
+{
+    bool Sell_Check;
+    float Price;
+};
+
+
 // using namespace std;
+
+/*
+ * 
+ * 
+ * 
+ . HABITAT  
+ * 
+ * 
+ *  
+*/
 
 class Habitat
 {
 protected:
     int m_Capacity = -1; // if the class are not defined, the default value are -1.
-
 public:
     Habitat();
     Habitat(int Capacity);
     ~Habitat();
-    void display() {
-        std::cout << "Hello sa maman" << std::endl;
-    }
 };
 
+/*
+ * 
+ * 
+ * 
+ . AIGLE HABITAT  
+ * 
+ * 
+ *  
+*/
 
 class Eagle_Habitat : public Habitat
 {
 private:
+    int m_ID;
     std::vector<Aigle> m_Current_Habitat = std::vector<Aigle>(5);
+
 public:
     Eagle_Habitat(/* args */);
     ~Eagle_Habitat();
-    void Delete_Animal(int ID);
+    Animal_Sell Delete_Animal(int ID);
     bool Add_Animal_In_Habitat(Aigle Current_Animal);
     std::vector<Aigle> Get_All_Animals();
+    int Get_ID();
     bool Is_Surpopulation();
 };
 
+/*
+ * 
+ * 
+ * 
+ . TIGRE HABITAT  
+ * 
+ * 
+ *  
+*/
 
 class Tiger_Habitat : public Habitat
 {
 private:
-    
 public:
     Tiger_Habitat();
     ~Tiger_Habitat();
 };
 
-
+/*
+ * 
+ * 
+ * 
+ . HEN HABITAT  
+ * 
+ * 
+ *  
+*/
 
 class Hen_Habitat : public Habitat
 {

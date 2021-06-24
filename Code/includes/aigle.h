@@ -8,23 +8,23 @@
 
 class Habitat;
 
-class Aigle :  public Animal
+class Aigle : public Animal
 {
 private:
     int m_ID;
-    // Habitat m_Animal_Habitat;
+    /* Nous aurions pu utiliser un pointeur vers la classe, mais nous avons envoyé un mail pour ce problème, 
+    sans réponse de votre part, puisqu'il y avait des erreurs d'include. Nous avons donc également utiisé un ID pour connaitre les habitats */
+    int m_ID_Eagle_Habitat; // Link the animal and habitat to know in what habitat he are (useful when we have a lot of habitat)
+
 public:
     Aigle(/* args */);
-    Aigle(bool gender, int age);
+    Aigle(bool gender, int age, int ID);
     ~Aigle();
     float CheckPriceValue();
     int Get_ID();
-    void tqt() {
-        //  m_Animal_Habitat.display();
-    };
-    // void CheckReproduction();
+    int Get_Habitat_ID();
+    int Set_Habitat_ID();
+    void Print();
 };
-
-
 
 #endif

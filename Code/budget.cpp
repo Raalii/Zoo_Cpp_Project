@@ -7,17 +7,23 @@ Budget::Budget(){
 Budget::~Budget(){
 }
 
+void Budget::Capital_Check() {
+    if (m_Capital < 0) {
+        m_bankrupt = true;
+    }
+}
 
-void Budget::Buy_Habitat(int price) {
+void Budget::Buy_Something(int price) {
     m_Capital -= price;
+    Capital_Check();
 };
 
-void Budget::Sell_Habitat(int price) {
+void Budget::Sell_Something(int price) {
     m_Capital += price;
 };
 
-void Budget::Buy_Habitat_For_Animals() {
-
+bool Budget::Get_Bankrupt() {
+    return m_bankrupt;
 }
 
 void Budget::Add_Money_By_Subvention(int month, int Nbr_Tiger, int Nbr_Eagle)
