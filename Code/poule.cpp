@@ -37,7 +37,31 @@ void Poule::Print()
 {
     std::cout << "----------" << std::endl;
     std::cout << "\nID : " << m_ID << std::endl;
-    std::cout << "\nPoule de " << m_State.s_Age.Current_Age << " mois, " << m_Gender << std::endl;
+    std::cout << "\nPoule de " << m_State.s_Age.Current_Age << " mois, ";
+    if (m_Gender)
+    {
+        std::cout << "male" << std::endl;
+    }
+    else
+    {
+        std::cout << "femelle" << std::endl;
+    }
+
+    std::cout << "Etat actuel : ";
+    if (m_State.s_Malade.Is_Malade)
+    {
+        std::cout << "Malade";
+    }
+    else
+    {
+        std::cout << " en bonne sante !";
+    }
+
+    if (m_State.s_Reproduction.Is_Reproduction)
+    {
+        std::cout << " et en reproduction ! ";
+    }
+    
     std::cout << "\n----------" << std::endl;
 }
 

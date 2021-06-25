@@ -54,9 +54,14 @@ void Zoo::Menu()
         cin >> zoo_name;
         cout << "\n"
              << player_name << ", la construction de votre zoo : " << zoo_name << " peut commencer !" << endl;
+
+        m_Zoo_nickname = zoo_name;
+        m_nickname = player_name;
+        Game_Loop();
     }
     else
     {
+        cout << "Le jeu est annule ! " << endl;
         // leave the game
     }
 }
@@ -67,7 +72,7 @@ void Zoo::Delete_Animal(int type, int ID)
     switch (type)
     {
     case 1: // aigle
-        for (int i = 0; i < m_Eagle_Habitats.size(); i++)
+        for (int i = 0; i < m_Tiger_Habitats.size(); i++)
         {
             Animal_Sell result = m_Eagle_Habitats[i].Delete_Animal(ID);
             if (result.Sell_Check)
@@ -664,9 +669,10 @@ void Zoo::Evenly_Buy_Food()
         cout << "\nLe prix du kilo de Viande est de 5 euros.\n\nVotre reponse : " << endl;
         cin >> number_kilo_food;
         number_kilo_food *= 5;
-        cout << "\nVous achetez " << number_kilo_food << " de kilo de viandes." << endl;
-        Buy_Something(number_kilo_food);
+        cout << "\nVous achetez " << number_kilo_food << " euros de viandes." << endl;
+        m_Budget.Buy_Something(number_kilo_food);
         m_Viande_Quantity += number_kilo_food;
+        cout << "Vous avez maintenant " << m_Viande_Quantity << "kg de viande !" << endl;
         break;
     default: //graine
         cout << "\nCombien de kilogramme de graines souhaitez-vous ?" << endl;
@@ -674,8 +680,9 @@ void Zoo::Evenly_Buy_Food()
         cin >> number_kilo_food;
         number_kilo_food *= 2.5;
         cout << "\nVous achetez " << number_kilo_food << " de kilo de graines." << endl;
-        Buy_Something(number_kilo_food);
+        m_Budget.Buy_Something(number_kilo_food);
         m_Graine_Quantity += number_kilo_food;
+        cout << "Vous avez maintenant " << m_Graine_Quantity << "kg de graines !" << endl;
         break;
     }
 }
@@ -729,11 +736,14 @@ void Zoo::Turn_Menu()
 
 void Zoo::Update_Month()
 {
-    /**
-     * Update Hungry State of Animal
-     * Update Maladie State of Animal
-     * Update Reproduction State Of Animal
-    */
+    m_born = 0;
+    Update_All_Animal_Hungry_State();
+    Update_All_Animal_Maladie_State();
+    Update_All_Animal_Reproduction_State();
+    m_Budget.Money_Incomme_By_Visitors(m_month, Total_Animal(2, false), Total_Animal(3, false), Total_Animal(1, false));
+    m_Budget.Add_Money_By_Subvention(m_month, Total_Animal(2, false), Total_Animal(3, false));
+    m_month++;
+    m_total_Month++;
 }
 
 void Zoo::Update_All_Animal_Reproduction_State()
@@ -749,7 +759,9 @@ void Zoo::Update_All_Animal_Reproduction_State()
         {
             if (Current_Habitat[i].Update_Reproduction())
             {
-                // ! Mettre en place la naissance d'un bébé
+                m_Eagle_Habitats[i].Born(m_Eagle_ID);
+                m_Eagle_ID++;
+                m_born++;
             }
         }
     }
@@ -766,6 +778,9 @@ void Zoo::Update_All_Animal_Reproduction_State()
             if (Current_Habitat[i].Update_Reproduction())
             {
                 // ! Mettre en place la naissance d'un bébé
+                m_Tiger_Habitats[i].Born(m_Tiger_ID);
+                m_Tiger_ID++;
+                m_born++;
             }
         }
     }
@@ -782,7 +797,10 @@ void Zoo::Update_All_Animal_Reproduction_State()
             if (Current_Habitat[i].Update_Reproduction())
             {
                 // ! Mettre en place la naissance d'un bébé
-            } 
+                m_Hen_Habitats[i].Born(m_Hen_ID);
+                m_Hen_ID++;
+                m_born++;
+            }
         }
     }
 }
@@ -821,9 +839,181 @@ void Zoo::Update_All_Animal_Maladie_State()
 }
 
 void Zoo::Update_All_Animal_Hungry_State()
+// Fonction which will update the food state of each animal in a zoo.
 {
-    for (int i = 0; i < m_Eagle_Habitats.size(); i++)
+    for (int i = 0; i < 31; i++)
     {
-       
+        for (int i = 0; i < m_Eagle_Habitats.size(); i++)
+        {
+            std::vector<Aigle> Current_Habitat = m_Eagle_Habitats[i].Get_All_Animals();
+            for (int Curr_Animal = 0; Curr_Animal < Current_Habitat.size(); Curr_Animal++)
+            {
+                // string Current_Type_Food = Current_Habitat[Curr_Animal].Get_Type_Of_Food();
+                float Current_Quantity = Current_Habitat[Curr_Animal].Get_Food_Quantity();
+
+                if (m_Viande_Quantity - Current_Quantity > 0)
+                {
+                    m_Viande_Quantity -= Current_Quantity;
+                    Current_Habitat[Curr_Animal].Reset_Hungry();
+                }
+                else
+                {
+                    Current_Habitat[Curr_Animal].Update_Hungry();
+                }
+            }
+        }
+
+        for (int i = 0; i < m_Tiger_Habitats.size(); i++)
+        {
+            std::vector<Tigre> Current_Habitat = m_Tiger_Habitats[i].Get_All_Animals();
+            for (int Curr_Animal = 0; Curr_Animal < Current_Habitat.size(); Curr_Animal++)
+            {
+                // string Current_Type_Food = Current_Habitat[Curr_Animal].Get_Type_Of_Food();
+                float Current_Quantity = Current_Habitat[Curr_Animal].Get_Food_Quantity();
+
+                if (m_Viande_Quantity - Current_Quantity > 0)
+                {
+                    m_Viande_Quantity -= Current_Quantity;
+                    Current_Habitat[Curr_Animal].Reset_Hungry();
+                }
+                else
+                {
+                    Current_Habitat[Curr_Animal].Update_Hungry();
+                }
+            }
+        }
+
+        for (int i = 0; i < m_Eagle_Habitats.size(); i++)
+        {
+            std::vector<Poule> Current_Habitat = m_Hen_Habitats[i].Get_All_Animals();
+            for (int Curr_Animal = 0; Curr_Animal < Current_Habitat.size(); Curr_Animal++)
+            {
+                float Current_Quantity = Current_Habitat[Curr_Animal].Get_Food_Quantity();
+
+                if (m_Graine_Quantity - Current_Quantity > 0)
+                {
+                    m_Graine_Quantity -= Current_Quantity;
+                    Current_Habitat[Curr_Animal].Reset_Hungry();
+                }
+                else
+                {
+                    Current_Habitat[Curr_Animal].Update_Hungry();
+                }
+            }
+        }
     }
+}
+
+int Zoo::Total_Animal(int type, bool Visible)
+{
+    /* Function which will return the total number of animal according to the type
+        The visible boolean will check if the function have only to return the visible animal                                                                     
+        (animals who are not in reproduction)  */
+
+    int count;
+    switch (type)
+    {
+    case 1:
+        for (int i = 0; i < m_Eagle_Habitats.size(); i++)
+        {
+            std::vector<Aigle> Current_Habitat = m_Eagle_Habitats[i].Get_All_Animals();
+
+            for (int Current_Animal = 0; Current_Animal < Current_Habitat.size(); Current_Animal++)
+            {
+                if (!Current_Habitat[Current_Animal].Get_Is_Reproduction() || !Visible)
+                {
+                    count++;
+                }
+            }
+        }
+
+        break;
+    case 2:
+        for (int i = 0; i < m_Tiger_Habitats.size(); i++)
+        {
+            std::vector<Tigre> Current_Habitat = m_Tiger_Habitats[i].Get_All_Animals();
+
+            for (int Current_Animal = 0; Current_Animal < Current_Habitat.size(); Current_Animal++)
+            {
+                if (!Current_Habitat[Current_Animal].Get_Is_Reproduction() || !Visible)
+                {
+                    count++;
+                }
+            }
+        }
+        break;
+    case 3:
+        for (int i = 0; i < m_Hen_Habitats.size(); i++)
+        {
+            std::vector<Poule> Current_Habitat = m_Hen_Habitats[i].Get_All_Animals();
+
+            for (int Current_Animal = 0; Current_Animal < Current_Habitat.size(); Current_Animal++)
+            {
+                if (!Current_Habitat[Current_Animal].Get_Is_Reproduction() || !Visible)
+                {
+                    count++;
+                }
+            }
+        }
+        break;
+
+    default:
+        break;
+    }
+    return count;
+}
+
+void Zoo::Evenly_Tidy_Animal()
+{
+    cout << "Voici tout vos animaux" << endl;
+    int Animal_Choice;
+    cout << "Quel type d'animal voulez vous gérer ?" << endl;
+    cout << "Tapez 1 pour aigle, 2 pour tigre, 3 pour poule : " << endl;
+    cin >> Animal_Choice;
+
+    switch (Animal_Choice)
+    {
+    case 1:
+
+        break;
+
+    default:
+        break;
+    }
+}
+// Notifications
+// Habitat ==> Ranger les animeaux
+// Evenement exceptionnel
+// Gérer les erreurs dans les cin
+// Commenter un peu le programme
+
+void Zoo::Game_Loop()
+{
+    int continues;
+    while (continues != 1 && !m_Budget.Get_Bankrupt())
+    {
+        Notification();
+        Turn_Menu();
+        Update_Month();
+    }
+}
+
+void Zoo::Notification()
+{
+    cout << "Rebonjour " << m_nickname << ", voici le rapport de ce mois ci sur notre " << m_Zoo_nickname;
+    cout << "Votre solde est de " << m_Budget.Get_Capital() << "euros" << endl
+         << endl;
+    cout << "Votre nombre d'aigle : " << Total_Animal(1, false) << endl;
+    cout << "Votre nombre de tigre : " << Total_Animal(2, false) << endl;
+    cout << "Votre nombre d'aigle : " << Total_Animal(3, false) << endl
+         << endl;
+    cout << "Votre nombre d'habitat aigle : " << m_Eagle_Habitats.size() << endl;
+    cout << "Votre nombre d'habitat tigre : " << m_Tiger_Habitats.size() << endl;
+    cout << "Votre nombre d'habitat poule : " << m_Hen_Habitats.size() << endl;
+    cout << "Nombre d'animaux nouveau " << m_born << endl;
+    cout << "Budget actuel : " << m_Budget.Get_Capital();
+    cout << "Voici l'etat de tout vos animaux :" << endl
+         << endl
+         << endl;
+    Print_All_Animals();
 }

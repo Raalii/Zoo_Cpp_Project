@@ -1,5 +1,7 @@
 #include "./includes/habitat.h"
-
+std::default_random_engine new_re(time(0));             // Depend of time to simulate random tirage
+std::uniform_int_distribution<int> male_or_female{1, 0};
+std::uniform_int_distribution<int> new_distrib{0, 100};
 // . Habitat : principal class
 
 Habitat::Habitat()
@@ -91,12 +93,12 @@ bool Eagle_Habitat::Is_Surpopulation()
     return m_Capacity < m_Current_Habitat.size();
 }
 
-bool Eagle_Habitat::Edit_Reproduce()
+void Eagle_Habitat::Edit_Reproduce()
 {
     int male = 0;
     int female = 0;
-    Aigle a_male; 
-    Aigle a_female; 
+    Aigle a_male;
+    Aigle a_female;
     for (int i = 0; i < m_Current_Habitat.size(); i++)
     {
         if (m_Current_Habitat[i].Get_Gender() && m_Current_Habitat[i].Can_Reproduce(Is_Surpopulation()))
@@ -113,22 +115,32 @@ bool Eagle_Habitat::Edit_Reproduce()
 
     if (male > 0 && female > 0)
     {
-        a_female.Start_Reproduction();   
+        a_female.Start_Reproduction();
     }
-    
 }
 
-void Eagle_Habitat::Edit_Maladie() {
+void Eagle_Habitat::Edit_Maladie()
+{
     for (int i = 0; i < m_Current_Habitat.size(); i++)
     {
-        m_Current_Habitat[i].Update_Malade(Is_Surpopulation());
+        if (m_Current_Habitat[i].Update_Malade(Is_Surpopulation())) {
+            Delete_Animal(m_Current_Habitat[i].Get_ID());
+        } 
     }
-    
 }
 
+void Eagle_Habitat::Born(int New_ID) {
+    Aigle baby(1 == male_or_female(new_re), 1, New_ID);
+    if (new_distrib(new_re) < 50)
+    {
+        std::cout << "le bebe a malheuresement peri !" << std::endl;
+    } else {
+        std::cout << "le bebe aigle est enfin nee !" << std::endl;
+        Add_Animal_In_Habitat(baby);
+    }
+}
 
-void Eagle_Habitat::
-
+// void Eagle_Habitat::
 
 /***************************************************************
 
@@ -211,13 +223,12 @@ bool Tiger_Habitat::Is_Surpopulation()
     return m_Capacity < m_Current_Habitat.size();
 }
 
-
-bool Tiger_Habitat::Edit_Reproduce()
+void Tiger_Habitat::Edit_Reproduce()
 {
     int male = 0;
     int female = 0;
-    Tigre a_male; 
-    Tigre a_female; 
+    Tigre a_male;
+    Tigre a_female;
     for (int i = 0; i < m_Current_Habitat.size(); i++)
     {
         if (m_Current_Habitat[i].Get_Gender() && m_Current_Habitat[i].Can_Reproduce(Is_Surpopulation()))
@@ -234,19 +245,30 @@ bool Tiger_Habitat::Edit_Reproduce()
 
     if (male > 0 && female > 0)
     {
-        a_female.Start_Reproduction();   
+        a_female.Start_Reproduction();
     }
-    
 }
 
-void Tiger_Habitat::Edit_Maladie() {
+void Tiger_Habitat::Edit_Maladie()
+{
     for (int i = 0; i < m_Current_Habitat.size(); i++)
     {
-        m_Current_Habitat[i].Update_Malade(Is_Surpopulation());
+        if (m_Current_Habitat[i].Update_Malade(Is_Surpopulation())) {
+            Delete_Animal(m_Current_Habitat[i].Get_ID());
+        }
     }
-    
 }
 
+void Tiger_Habitat::Born(int New_ID) {
+    Tigre baby(1 == male_or_female(new_re), 1, New_ID);
+    if (new_distrib(new_re) < 50)
+    {
+        std::cout << "le bebe a malheuresement peri !" << std::endl;
+    } else {
+        std::cout << "le bebe tigre est enfin nee !" << std::endl;
+        Add_Animal_In_Habitat(baby);
+    }
+}
 
 /***************************************************************
 
@@ -329,12 +351,12 @@ bool Hen_Habitat::Is_Surpopulation()
     return m_Capacity < m_Current_Habitat.size();
 }
 
-bool Hen_Habitat::Edit_Reproduce()
+void Hen_Habitat::Edit_Reproduce()
 {
     int male = 0;
     int female = 0;
-    Poule a_male; 
-    Poule a_female; 
+    Poule a_male;
+    Poule a_female;
     for (int i = 0; i < m_Current_Habitat.size(); i++)
     {
         if (m_Current_Habitat[i].Get_Gender() && m_Current_Habitat[i].Can_Reproduce(Is_Surpopulation()))
@@ -351,15 +373,27 @@ bool Hen_Habitat::Edit_Reproduce()
 
     if (male > 0 && female > 0)
     {
-        a_female.Start_Reproduction();   
+        a_female.Start_Reproduction();
     }
-    
 }
 
-void Hen_Habitat::Edit_Maladie() {
+void Hen_Habitat::Edit_Maladie()
+{
     for (int i = 0; i < m_Current_Habitat.size(); i++)
     {
-        m_Current_Habitat[i].Update_Malade(Is_Surpopulation());
+       if (m_Current_Habitat[i].Update_Malade(Is_Surpopulation())) {
+            Delete_Animal(m_Current_Habitat[i].Get_ID());
+        }
     }
-    
+}
+
+void Hen_Habitat::Born(int New_ID) {
+    Poule baby(1 == male_or_female(new_re), 1, New_ID);
+    if (new_distrib(new_re) < 50)
+    {
+        std::cout << "le bebe a malheuresement peri !" << std::endl;
+    } else {
+        std::cout << "le bebe tigre est enfin nee !" << std::endl;
+        Add_Animal_In_Habitat(baby);
+    }
 }

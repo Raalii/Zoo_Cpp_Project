@@ -63,7 +63,7 @@ public:
     bool Get_Gender();
     void UpdateState();
     void Update_Hungry();
-    void Update_Malade(bool Is_Surpopulation);
+    bool Update_Malade(bool Is_Surpopulation);
     bool Update_Reproduction();
     void Reset_Reproduction();
     void CheckMaladie(int Probability);

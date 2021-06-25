@@ -42,10 +42,17 @@ void Animal::CheckMaladie(int Probability)
     }
 }
 
-void Animal::Update_Malade(bool Is_Surpopulation)
+bool Animal::Update_Malade(bool Is_Surpopulation)
 {
     if (m_State.s_Malade.Is_Malade)
     {
+        int prob = distrib(re);
+        // std::cout << prob << std::endl;
+        if (prob < 10) // if the random value (0-100) returned are inferior than Probability (=Probability% of chance)
+        {
+            return true;
+        }
+
         if (m_State.s_Malade.Max_Days <= m_State.s_Malade.days)
         {
             m_State.s_Malade.Is_Malade = false;
@@ -71,8 +78,10 @@ void Animal::Update_Malade(bool Is_Surpopulation)
         {
             CheckMaladie(50); // 50% chance to be Malade with surpopulation
         }
-        CheckMaladie(30); // 30% chance to be Malade
+        CheckMaladie(20); // 20% chance to be Malade for all animal
     }
+
+    return false;
 }
 
 /* 
@@ -154,7 +163,7 @@ bool Animal::Update_Reproduction()
     {
         return false;
     }
-    
+
     m_State.s_Reproduction.days += 30;
     if (m_State.s_Hungry.Is_Hungry)
     {
@@ -173,11 +182,13 @@ bool Animal::Update_Reproduction()
     return false;
 }
 
-bool Animal::Get_Gender() {
+bool Animal::Get_Gender()
+{
     return m_Gender;
 }
 
-void Animal::Start_Reproduction() {
+void Animal::Start_Reproduction()
+{
     m_State.s_Reproduction.Is_Reproduction = true;
 }
 
@@ -189,12 +200,12 @@ void Animal::Start_Reproduction() {
 
 */
 
-void Animal::Update_Age() {
+void Animal::Update_Age()
+{
     m_State.s_Age.Current_Age += 1;
 
     if (m_State.s_Age.Current_Age >= m_State.s_Age.Life_Esperance)
     {
         /* SUPPRIMER ANIMAL */
-    } 
+    }
 }
-

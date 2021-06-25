@@ -65,8 +65,10 @@ public:
     int Get_ID();
     void Print();
     bool Is_Surpopulation();
-    bool Edit_Reproduce();
+    void Edit_Reproduce();
     void Edit_Maladie();
+    void Edit_Food();
+    void Born(int New_ID);
 };
 
 /*
@@ -93,8 +95,9 @@ public:
     int Get_ID();
     void Print();
     bool Is_Surpopulation();
-    bool Edit_Reproduce();
+    void Edit_Reproduce();
     void Edit_Maladie();
+    void Born(int New_ID);
 };
 
 /*
@@ -122,8 +125,9 @@ public:
     int Get_ID();
     void Print();
     bool Is_Surpopulation();
-    bool Edit_Reproduce();
+    void Edit_Reproduce();
     void Edit_Maladie();
+    void Born(int New_ID);
 };
 
 #endif

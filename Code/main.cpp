@@ -40,7 +40,7 @@ Notre simulateur doit mettre en place :
 int main() {
     Zoo NewGame;
     NewGame.Menu();
-    NewGame.Evenly_Buy_Animal();
+    // NewGame.Evenly_Buy_Animal();
     // Aigle v(false, 144, 4);
     // std::cout << v.CheckPriceValue() << std::endl << v.Can_Reproduce() << std::endl;
     return 0;

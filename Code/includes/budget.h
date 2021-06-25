@@ -18,7 +18,7 @@ class Budget {
         float Get_Capital();
         bool Get_Bankrupt();
         void Buy_Something(int price);
-        void Sell_Something(int price); // ! A modifie
+        void Sell_Something(int price);
         void Capital_Check();
 };
 
