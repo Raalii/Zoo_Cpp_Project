@@ -482,13 +482,14 @@ void Zoo::Evenly_Sell_Habitat()
     case 1: // ! Eagle
         if (m_Eagle_Habitats.size() != 0)
         {
-            cout << "\nVoici vos habitats actuels : \n"<< endl;
+            cout << "\nVoici vos habitats actuels : \n"
+                 << endl;
             for (int i = 0; i < m_Eagle_Habitats.size(); i++)
             {
                 m_Eagle_Habitats[i].Print();
             }
 
-            cout << "\nVeuillez rentrer le numero de l'habitat que vous voulez supprimer : "<<endl;
+            cout << "\nVeuillez rentrer le numero de l'habitat que vous voulez supprimer : " << endl;
             cin >> ID_Choice;
 
             cout << "\nATTENTION ! Tous les animaux de l'habitat seront remis en liberte dans la nature." << endl;
@@ -520,13 +521,14 @@ void Zoo::Evenly_Sell_Habitat()
 
         if (m_Tiger_Habitats.size() != 0)
         {
-            cout << "\nVoici vos habitats actuels : \n"<< endl;
+            cout << "\nVoici vos habitats actuels : \n"
+                 << endl;
             for (int i = 0; i < m_Tiger_Habitats.size(); i++)
             {
                 m_Tiger_Habitats[i].Print();
             }
 
-            cout << "Veuillez rentrer le numero de l'habitat que vous voulez supprimer : "<<endl;
+            cout << "Veuillez rentrer le numero de l'habitat que vous voulez supprimer : " << endl;
             cin >> ID_Choice;
 
             cout << "\nATTENTION ! Tous les animaux de l'habitat seront remis en liberte dans la nature." << endl;
@@ -557,13 +559,14 @@ void Zoo::Evenly_Sell_Habitat()
 
         if (m_Hen_Habitats.size() != 0)
         {
-            cout << "\nVoici vos habitats actuels : \n"<< endl;
+            cout << "\nVoici vos habitats actuels : \n"
+                 << endl;
             for (int i = 0; i < m_Hen_Habitats.size(); i++)
             {
                 m_Hen_Habitats[i].Print();
             }
 
-            cout << "\nVeuillez rentrer le numero de l'habitat que vous voulez supprimer : "<<endl;
+            cout << "\nVeuillez rentrer le numero de l'habitat que vous voulez supprimer : " << endl;
             cin >> ID_Choice;
 
             cout << "\nATTENTION ! Tous les animaux de l'habitat seront remis en liberte dans la nature." << endl;
@@ -621,7 +624,7 @@ bool Zoo::Delete_Habitat(int type, int ID)
                 return true;
             }
         }
-       
+
         break;
     case 3: // ! Hen
         for (int i = 0; i < m_Hen_Habitats.size(); i++)
@@ -661,7 +664,7 @@ void Zoo::Evenly_Buy_Food()
         cout << "\nLe prix du kilo de Viande est de 5 euros.\n\nVotre reponse : " << endl;
         cin >> number_kilo_food;
         number_kilo_food *= 5;
-        cout << "\nVous achetez " << number_kilo_food << " de kilo de viandes."<<endl;
+        cout << "\nVous achetez " << number_kilo_food << " de kilo de viandes." << endl;
         Buy_Something(number_kilo_food);
         m_Viande_Quantity += number_kilo_food;
         break;
@@ -670,7 +673,7 @@ void Zoo::Evenly_Buy_Food()
         cout << "\nLe prix du kilo de Viande est de 2,5 euros.\n\nVotre reponse : " << endl;
         cin >> number_kilo_food;
         number_kilo_food *= 2.5;
-        cout << "\nVous achetez " << number_kilo_food << " de kilo de graines."<<endl;
+        cout << "\nVous achetez " << number_kilo_food << " de kilo de graines." << endl;
         Buy_Something(number_kilo_food);
         m_Graine_Quantity += number_kilo_food;
         break;
@@ -736,46 +739,91 @@ void Zoo::Update_Month()
 void Zoo::Update_All_Animal_Reproduction_State()
 {
     /**
-    * Aigle
+     * Aigle
     */
     for (int i = 0; i < m_Eagle_Habitats.size(); i++)
     {
+        m_Eagle_Habitats[i].Edit_Reproduce();
         std::vector<Aigle> Current_Habitat = m_Eagle_Habitats[i].Get_All_Animals();
         for (int j = 0; j < Current_Habitat.size(); j++)
         {
-            
+            if (Current_Habitat[i].Update_Reproduction())
+            {
+                // ! Mettre en place la naissance d'un bébé
+            }
         }
     }
 
     /**
-    * Tigre
+     * Tigre
     */
     for (int i = 0; i < m_Tiger_Habitats.size(); i++)
     {
+        m_Tiger_Habitats[i].Edit_Reproduce();
         std::vector<Tigre> Current_Habitat = m_Tiger_Habitats[i].Get_All_Animals();
         for (int j = 0; j < Current_Habitat.size(); j++)
         {
-            
+            if (Current_Habitat[i].Update_Reproduction())
+            {
+                // ! Mettre en place la naissance d'un bébé
+            }
         }
     }
 
     /**
-    * Poule
+     * Poule
     */
     for (int i = 0; i < m_Hen_Habitats.size(); i++)
     {
+        m_Hen_Habitats[i].Edit_Reproduce();
         std::vector<Poule> Current_Habitat = m_Hen_Habitats[i].Get_All_Animals();
         for (int j = 0; j < Current_Habitat.size(); j++)
         {
-            
+            if (Current_Habitat[i].Update_Reproduction())
+            {
+                // ! Mettre en place la naissance d'un bébé
+            } 
         }
     }
 }
 
 void Zoo::Update_All_Animal_Maladie_State()
 {
+    /**
+     * Aigle 
+    */
+
+    for (int i = 0; i < m_Eagle_Habitats.size(); i++)
+    {
+
+        m_Eagle_Habitats[i].Edit_Maladie();
+    }
+
+    /**
+     * Tigre
+    */
+
+    for (int i = 0; i < m_Tiger_Habitats.size(); i++)
+    {
+
+        m_Tiger_Habitats[i].Edit_Maladie();
+    }
+
+    /**
+     * Poule
+    */
+
+    for (int i = 0; i < m_Hen_Habitats.size(); i++)
+    {
+
+        m_Hen_Habitats[i].Edit_Maladie();
+    }
 }
 
 void Zoo::Update_All_Animal_Hungry_State()
 {
+    for (int i = 0; i < m_Eagle_Habitats.size(); i++)
+    {
+       
+    }
 }

@@ -95,24 +95,39 @@ bool Eagle_Habitat::Edit_Reproduce()
 {
     int male = 0;
     int female = 0;
+    Aigle a_male; 
+    Aigle a_female; 
     for (int i = 0; i < m_Current_Habitat.size(); i++)
     {
         if (m_Current_Habitat[i].Get_Gender() && m_Current_Habitat[i].Can_Reproduce(Is_Surpopulation()))
         {
             male++;
+            a_male = m_Current_Habitat[i];
         }
         else if (!m_Current_Habitat[i].Get_Gender() && m_Current_Habitat[i].Can_Reproduce(Is_Surpopulation()))
         {
             female++;
+            a_female = m_Current_Habitat[i];
         }
     }
 
     if (male > 0 && female > 0)
     {
-        /* code */
+        a_female.Start_Reproduction();   
     }
     
 }
+
+void Eagle_Habitat::Edit_Maladie() {
+    for (int i = 0; i < m_Current_Habitat.size(); i++)
+    {
+        m_Current_Habitat[i].Update_Malade(Is_Surpopulation());
+    }
+    
+}
+
+
+void Eagle_Habitat::
 
 
 /***************************************************************
@@ -196,6 +211,43 @@ bool Tiger_Habitat::Is_Surpopulation()
     return m_Capacity < m_Current_Habitat.size();
 }
 
+
+bool Tiger_Habitat::Edit_Reproduce()
+{
+    int male = 0;
+    int female = 0;
+    Tigre a_male; 
+    Tigre a_female; 
+    for (int i = 0; i < m_Current_Habitat.size(); i++)
+    {
+        if (m_Current_Habitat[i].Get_Gender() && m_Current_Habitat[i].Can_Reproduce(Is_Surpopulation()))
+        {
+            male++;
+            a_male = m_Current_Habitat[i];
+        }
+        else if (!m_Current_Habitat[i].Get_Gender() && m_Current_Habitat[i].Can_Reproduce(Is_Surpopulation()))
+        {
+            female++;
+            a_female = m_Current_Habitat[i];
+        }
+    }
+
+    if (male > 0 && female > 0)
+    {
+        a_female.Start_Reproduction();   
+    }
+    
+}
+
+void Tiger_Habitat::Edit_Maladie() {
+    for (int i = 0; i < m_Current_Habitat.size(); i++)
+    {
+        m_Current_Habitat[i].Update_Malade(Is_Surpopulation());
+    }
+    
+}
+
+
 /***************************************************************
 
 // . HEN HABITAT CLASS
@@ -275,4 +327,39 @@ bool Hen_Habitat::Is_Surpopulation()
 // Check if the animal are in surpopulation
 {
     return m_Capacity < m_Current_Habitat.size();
+}
+
+bool Hen_Habitat::Edit_Reproduce()
+{
+    int male = 0;
+    int female = 0;
+    Poule a_male; 
+    Poule a_female; 
+    for (int i = 0; i < m_Current_Habitat.size(); i++)
+    {
+        if (m_Current_Habitat[i].Get_Gender() && m_Current_Habitat[i].Can_Reproduce(Is_Surpopulation()))
+        {
+            male++;
+            a_male = m_Current_Habitat[i];
+        }
+        else if (!m_Current_Habitat[i].Get_Gender() && m_Current_Habitat[i].Can_Reproduce(Is_Surpopulation()))
+        {
+            female++;
+            a_female = m_Current_Habitat[i];
+        }
+    }
+
+    if (male > 0 && female > 0)
+    {
+        a_female.Start_Reproduction();   
+    }
+    
+}
+
+void Hen_Habitat::Edit_Maladie() {
+    for (int i = 0; i < m_Current_Habitat.size(); i++)
+    {
+        m_Current_Habitat[i].Update_Malade(Is_Surpopulation());
+    }
+    
 }

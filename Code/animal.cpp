@@ -150,6 +150,11 @@ bool Animal::Update_Reproduction()
 /* This function will be update the reproduction state, when the animal are in gestation. 
    Return true if the baby will born, and false for others cases */
 {
+    if (!m_State.s_Reproduction.Is_Reproduction)
+    {
+        return false;
+    }
+    
     m_State.s_Reproduction.days += 30;
     if (m_State.s_Hungry.Is_Hungry)
     {
@@ -170,6 +175,10 @@ bool Animal::Update_Reproduction()
 
 bool Animal::Get_Gender() {
     return m_Gender;
+}
+
+void Animal::Start_Reproduction() {
+    m_State.s_Reproduction.Is_Reproduction = true;
 }
 
 /* 

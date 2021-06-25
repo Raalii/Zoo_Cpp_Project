@@ -66,6 +66,7 @@ public:
     void Print();
     bool Is_Surpopulation();
     bool Edit_Reproduce();
+    void Edit_Maladie();
 };
 
 /*
@@ -92,6 +93,8 @@ public:
     int Get_ID();
     void Print();
     bool Is_Surpopulation();
+    bool Edit_Reproduce();
+    void Edit_Maladie();
 };
 
 /*
@@ -119,6 +122,8 @@ public:
     int Get_ID();
     void Print();
     bool Is_Surpopulation();
+    bool Edit_Reproduce();
+    void Edit_Maladie();
 };
 
 #endif
