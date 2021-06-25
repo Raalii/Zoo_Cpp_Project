@@ -40,6 +40,7 @@ public:
     void Evenly_Sell_Animal();
     void Evenly_Buy_Habitat();
     void Evenly_Sell_Habitat();
+    void Buy_Something(int price);
     void Add_Animal(int type, int age, bool gender);
     void Delete_Animal(int type, int ID );
     void Check_User_Action();

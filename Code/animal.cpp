@@ -89,7 +89,7 @@ void Animal::Update_Hungry()
 
     if (m_State.s_Hungry.Is_Hungry && m_State.s_Hungry.Days_Without_Food == m_State.s_Hungry.Max_Days * 2) // for instance 10 days to be hungry, and 20 to died.
     {
-        // * Supprimer l'Animal
+        // * Remove the Animal
         std::cout << "Votre Animal est mort de faim ! " << std::endl;
     }
     else
