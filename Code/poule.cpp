@@ -36,9 +36,9 @@ Poule::Poule(bool gender, int age, int ID) : Animal(gender, age)
 void Poule::Print()
 {
     std::cout << "----------" << std::endl;
-    std::cout << "ID : " << m_ID << std::endl;
-    std::cout << "Poule de " << m_State.s_Age.Current_Age << " mois, " << m_Gender << std::endl;
-    std::cout << "----------" << std::endl;
+    std::cout << "\nID : " << m_ID << std::endl;
+    std::cout << "\nPoule de " << m_State.s_Age.Current_Age << " mois, " << m_Gender << std::endl;
+    std::cout << "\n----------" << std::endl;
 }
 
 Poule::~Poule()

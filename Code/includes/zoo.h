@@ -46,6 +46,13 @@ public:
     void Random_Event();
     void Update_Malade_State();
     void Print_All_Animals();
+    void Evenly_Buy_Food();
+    void Update_Month();
+    void Update_All_Animal_Reproduction_State();
+    void Update_All_Animal_Maladie_State();
+    void Update_All_Animal_Hungry_State();
+    bool Delete_Habitat(int type, int ID);
+    void Turn_Menu();
     // void Print_Animal();
     bool Check_Season();
     int Check_Price_Buy_Value(int type, int age, int sex);

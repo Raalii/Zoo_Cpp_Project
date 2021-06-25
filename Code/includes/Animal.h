@@ -60,6 +60,7 @@ public:
     Animal();
     ~Animal();
     Animal(bool gender, int age);
+    bool Get_Gender();
     void UpdateState();
     void Update_Hungry();
     void Update_Malade(bool Is_Surpopulation);
@@ -68,7 +69,7 @@ public:
     void CheckMaladie(int Probability);
     void Eats_Food();
     void Reset_Hungry();
-    bool Can_Reproduce();
+    bool Can_Reproduce(bool Surpopulation);
     bool Get_Is_Reproduction();
     string Get_Type_Of_Food();
     float Get_Food_Quantity();

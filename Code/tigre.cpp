@@ -16,14 +16,14 @@ Tigre::Tigre(bool gender, int age, int ID) : Animal(gender, age)
 
     if (gender)
     {
-        //  define all parametters for male Eagle
+        //  define all parametters for male Ea        
         m_Type_Of_Food = "viande";
         m_Food_Quantity = 12;
         m_State.s_Age.Sexual_Maturity = 72; // = 6 years
     }
     else
     {
-        // define all parametters for female Eagle
+        // define all parametters for female Ea
         m_Type_Of_Food = "viande";
         m_Food_Quantity = 10;
         m_State.s_Age.Sexual_Maturity = 48; // = 4 years
@@ -34,8 +34,8 @@ void Tigre::Print()
 {
     std::cout << "----------" << std::endl;
     std::cout << "ID : " << m_ID << std::endl;
-    std::cout << "Tigre de " << m_State.s_Age.Current_Age << " mois, " << m_Gender << std::endl;
-    std::cout << "----------" << std::endl;
+    std::cout << "\nTigre de " << m_State.s_Age.Current_Age << " mois, " << m_Gender << std::endl;
+    std::cout << "\n----------" << std::endl;
 }
 
 Tigre::~Tigre()

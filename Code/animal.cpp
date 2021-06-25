@@ -126,11 +126,11 @@ float Animal::Get_Food_Quantity()
 
 */
 
-bool Animal::Can_Reproduce()
+bool Animal::Can_Reproduce(bool Surpopulation)
 // Function which check if the animal can reproduce or not
 {
     // If the Animal are Malade, Hungry, not in sexual period, New or already in reproduction, that return true. Else he return false.
-    return m_State.s_Hungry.Is_Hungry || m_State.s_Age.Current_Age < m_State.s_Age.Sexual_Maturity || m_State.s_Age.Current_Age >= m_State.s_Age.Limite_Reproduction || m_State.s_Malade.Is_Malade || m_State.s_Reproduction.Is_Newer || m_State.s_Reproduction.Is_Reproduction;
+    return m_State.s_Hungry.Is_Hungry || m_State.s_Age.Current_Age < m_State.s_Age.Sexual_Maturity || m_State.s_Age.Current_Age >= m_State.s_Age.Limite_Reproduction || m_State.s_Malade.Is_Malade || m_State.s_Reproduction.Is_Newer || m_State.s_Reproduction.Is_Reproduction || Surpopulation;
 }
 
 bool Animal::Get_Is_Reproduction()
@@ -168,6 +168,9 @@ bool Animal::Update_Reproduction()
     return false;
 }
 
+bool Animal::Get_Gender() {
+    return m_Gender;
+}
 
 /* 
 

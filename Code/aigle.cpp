@@ -34,10 +34,10 @@ Aigle::Aigle(bool gender, int age, int ID) : Animal(gender, age)
 
 void Aigle::Print()
 {
-    std::cout << "----------" << std::endl;
-    std::cout << "ID : " << m_ID << std::endl;
-    std::cout << "Aigle de " << m_State.s_Age.Current_Age << " mois, " << m_Gender << std::endl;
-    std::cout << "----------" << std::endl;
+    std::cout << "************" << std::endl;
+    std::cout << "\nID : " << m_ID << std::endl;
+    std::cout << "\nAigle de " << m_State.s_Age.Current_Age << " mois, " << m_Gender << std::endl;
+    std::cout << "\n***********" << std::endl;
 }
 
 Aigle::~Aigle()
