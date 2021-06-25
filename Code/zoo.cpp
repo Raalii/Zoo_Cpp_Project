@@ -681,7 +681,7 @@ void Zoo::Turn_Menu()
 {
     // . Informer l'utilisateur des news de son zoo !
     int Action_Choice;
-    cout << "\Que souhaitez-vous faire maintenant ? " << endl;
+    cout << "\nQue souhaitez-vous faire maintenant ? " << endl;
 
     while (Action_Choice != 6)
     {
