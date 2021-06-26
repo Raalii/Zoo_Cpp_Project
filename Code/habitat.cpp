@@ -23,6 +23,12 @@ Eagle_Habitat::Eagle_Habitat()
     m_Capacity = 4;
 }
 
+Eagle_Habitat::Eagle_Habitat(int ID)
+{
+    m_Capacity = 4;
+    m_ID = ID;
+}
+
 Eagle_Habitat::~Eagle_Habitat()
 {
 }
@@ -140,7 +146,12 @@ void Eagle_Habitat::Born(int New_ID) {
     }
 }
 
-// void Eagle_Habitat::
+void Eagle_Habitat::Edit_Age() {
+    for (int i = 0; i < m_Current_Habitat.size(); i++)
+    {
+        m_Current_Habitat[i].Update_Age();
+    } 
+}
 
 /***************************************************************
 
@@ -151,6 +162,12 @@ void Eagle_Habitat::Born(int New_ID) {
 Tiger_Habitat::Tiger_Habitat()
 {
     m_Capacity = 2;
+}
+
+Tiger_Habitat::Tiger_Habitat(int ID)
+{
+    m_Capacity = 2;
+    m_ID = ID;
 }
 
 Tiger_Habitat::~Tiger_Habitat()
@@ -270,6 +287,13 @@ void Tiger_Habitat::Born(int New_ID) {
     }
 }
 
+void Tiger_Habitat::Edit_Age() {
+    for (int i = 0; i < m_Current_Habitat.size(); i++)
+    {
+        m_Current_Habitat[i].Update_Age();
+    } 
+}
+
 /***************************************************************
 
 // . HEN HABITAT CLASS
@@ -279,6 +303,12 @@ void Tiger_Habitat::Born(int New_ID) {
 Hen_Habitat::Hen_Habitat(/* args */)
 {
     m_Capacity = 10;
+}
+
+Hen_Habitat::Hen_Habitat(int ID)
+{
+    m_Capacity = 10;
+    m_ID = ID;
 }
 
 Hen_Habitat::~Hen_Habitat()
@@ -397,3 +427,11 @@ void Hen_Habitat::Born(int New_ID) {
         Add_Animal_In_Habitat(baby);
     }
 }
+
+void Hen_Habitat::Edit_Age() {
+    for (int i = 0; i < m_Current_Habitat.size(); i++)
+    {
+        m_Current_Habitat[i].Update_Age();
+    } 
+}
+

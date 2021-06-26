@@ -9,7 +9,7 @@
 class Budget {
     private:
         float m_Capital = 80000;
-        bool m_bankrupt; //Variable for whether user is bankrupt or not
+        bool m_bankrupt = false; //Variable for whether user is bankrupt or not
     public:
         Budget();
         ~Budget();

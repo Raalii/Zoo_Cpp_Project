@@ -12,10 +12,13 @@ private:
     // . Personnalizable informations (name of the zoo, pseudo...)
     string m_nickname;
     string m_Zoo_nickname;
-    // . All variable IDs, to differentiate all animals
+    // . All variable IDs, to differentiate all animals and All habitat
     int m_Eagle_ID = 0;
     int m_Tiger_ID = 0;
     int m_Hen_ID = 0;
+    int m_Hen_Habitat_ID = 0;
+    int m_Tiger_Habitat_ID = 0;
+    int m_Eagle_Habitat_ID = 0;
     // . Define dynamic array of each Habitat 
     vector<Eagle_Habitat> m_Eagle_Habitats = vector<Eagle_Habitat>(0);
     vector<Tiger_Habitat> m_Tiger_Habitats = vector<Tiger_Habitat>(0);
@@ -29,10 +32,10 @@ private:
     int m_total_Month = 0;
     int m_month = 1;
     // . Variable to notify the users for news of the month
-    int m_born;
-    int m_died;
-    int m_depense;
-    int m_money_entry;
+    int m_born = 0;
+    int m_died = 0;
+    int m_depense = 0;
+    int m_money_entry = 0;
 public:
     Zoo();
     ~Zoo();
@@ -63,6 +66,7 @@ public:
     void Game_Loop();
     void Turn_Menu();
     void Notification();
+    void Update_All_Animal_Age_State();
 };
 
 #endif

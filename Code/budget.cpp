@@ -1,5 +1,5 @@
 #include "./includes/budget.h"
-
+#include <iostream>
 
 Budget::Budget(){
 }
@@ -10,6 +10,9 @@ Budget::~Budget(){
 void Budget::Capital_Check() {
     if (m_Capital < 0) {
         m_bankrupt = true;
+        std::cout << "Votre solde est negatif ! le prochain tour vous sera fatal..." << std::endl;
+    } else {
+        std::cout << "Il vous reste " << m_Capital << " euros ! " << std::endl;
     }
 }
 
@@ -20,6 +23,7 @@ void Budget::Buy_Something(int price) {
 
 void Budget::Sell_Something(int price) {
     m_Capital += price;
+    std::cout << "Il vous reste " << m_Capital << " euros ! " << std::endl;
 };
 
 bool Budget::Get_Bankrupt() {

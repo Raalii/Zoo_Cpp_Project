@@ -48,7 +48,7 @@ void Zoo::Menu()
         cout << "\nEntrez votre pseudo : \n"
              << endl;
         cin >> player_name;
-        cout << "\nBienvenue" << player_name << "!! Definissez le nom de votre Zoo : \n"
+        cout << "\nBienvenue " << player_name << " !! Definissez le nom de votre Zoo : \n"
              << endl;
         cout << endl;
         cin >> zoo_name;
@@ -240,8 +240,8 @@ void Zoo::Evenly_Buy_Animal()
     if (confirm == 1)
     {
         cout << "\nAjout de l'animal a votre enclos..." << endl;
-        // m_Budget.Buy_Something(price);
-        // Add_Animal(Animal_Choice, Animal_Age, Sex_Choice == 1)
+        m_Budget.Buy_Something(price);
+        Add_Animal(Animal_Choice, Animal_Age, Sex_Choice == 1);
         cout << "C'est" << Display_Good_Animal(0, Sex_Choice, 0) << " " << Display_Good_Animal(Animal_Choice, 0, 0) << " de " << Animal_Age << " mois.\n"
              << endl;
         cout << "C'est fait !" << endl;
@@ -409,6 +409,7 @@ void Zoo::Evenly_Sell_Animal()
     do
     {
         cout << "\nConfirmer ? \nAppuyez sur 1 pour Confirmer,\n Appuyez sur 2 pour Annuler.\n\nVotre reponse : " << endl;
+        cin >> confirm;
     } while (confirm != 1 && confirm != 2);
 
     Delete_Animal(type, ID_Selected);
@@ -433,8 +434,10 @@ void Zoo::Evenly_Buy_Habitat()
     {
     case 1:
     {
-        Eagle_Habitat New_Habitat;
+        Eagle_Habitat New_Habitat(m_Eagle_Habitat_ID);
+        m_Eagle_Habitat_ID++;
         m_Eagle_Habitats.push_back(New_Habitat);
+        cout << "Taille : " << m_Eagle_Habitats.size() << endl;
         cout << "\nRangement des animaux..." << endl;
         m_Budget.Buy_Something(2000);
         cout << "\nAchat réussi ! " << endl;
@@ -443,7 +446,8 @@ void Zoo::Evenly_Buy_Habitat()
     break;
     case 2:
     {
-        Tiger_Habitat New_Habitat;
+        Tiger_Habitat New_Habitat(m_Tiger_Habitat_ID);
+        m_Tiger_Habitat_ID++;
         m_Tiger_Habitats.push_back(New_Habitat);
         cout << "\nRangement des animaux..." << endl;
         m_Budget.Buy_Something(2000);
@@ -453,7 +457,8 @@ void Zoo::Evenly_Buy_Habitat()
     break;
     case 3:
     {
-        Hen_Habitat New_Habitat;
+        Hen_Habitat New_Habitat(m_Hen_Habitat_ID);
+        m_Hen_Habitat_ID++;
         m_Hen_Habitats.push_back(New_Habitat);
         cout << "\nRangement des animaux..." << endl;
         m_Budget.Buy_Something(300);
@@ -508,6 +513,7 @@ void Zoo::Evenly_Sell_Habitat()
             {
                 if (Delete_Habitat(Habitat_Choice, ID_Choice))
                 {
+                    m_Budget.Sell_Something(500);
                     cout << "\nVotre habitat a bien ete supprime." << endl;
                 }
                 else
@@ -533,13 +539,13 @@ void Zoo::Evenly_Sell_Habitat()
                 m_Tiger_Habitats[i].Print();
             }
 
-            cout << "Veuillez rentrer le numero de l'habitat que vous voulez supprimer : " << endl;
+            cout << "Veuillez rentrer le numero de l'habitat que vous voulez supprimer : ";
             cin >> ID_Choice;
 
             cout << "\nATTENTION ! Tous les animaux de l'habitat seront remis en liberte dans la nature." << endl;
             do
             {
-                cout << "\nTapez 1 pour confirmer.\nTapez 2 pour annuler.\nVotre Reponse :" << endl;
+                cout << "\nTapez 1 pour confirmer.\nTapez 2 pour annuler.\nVotre Reponse :";
                 cin >> confirm;
             } while (confirm != 1 && confirm != 2);
 
@@ -547,6 +553,7 @@ void Zoo::Evenly_Sell_Habitat()
             {
                 if (Delete_Habitat(Habitat_Choice, ID_Choice))
                 {
+                    m_Budget.Sell_Something(500);
                     cout << "\nVotre habitat a bien ete supprime." << endl;
                 }
                 else
@@ -585,6 +592,7 @@ void Zoo::Evenly_Sell_Habitat()
             {
                 if (Delete_Habitat(Habitat_Choice, ID_Choice))
                 {
+                    m_Budget.Sell_Something(50);
                     cout << "\nVotre habitat a bien ete supprime." << endl;
                 }
                 else
@@ -687,63 +695,37 @@ void Zoo::Evenly_Buy_Food()
     }
 }
 
-void Zoo::Turn_Menu()
+void Zoo::Update_All_Animal_Age_State()
 {
-    // . Informer l'utilisateur des news de son zoo !
-    int Action_Choice;
-    cout << "\nQue souhaitez-vous faire maintenant ? " << endl;
+    /**
+     * Aigle 
+    */
 
-    while (Action_Choice != 6)
+    for (int i = 0; i < m_Eagle_Habitats.size(); i++)
     {
-        do
-        {
-            cout << endl;
-            cout << "\nTapez 1 pour acheter un habitat." << endl;
-            cout << "\nTapez 2 pour vendre un habitat." << endl;
-            cout << "\nTapez 3 pour acheter un animal." << endl;
-            cout << "\nTapez 4 pour vendre un animal." << endl;
-            cout << "\nTapez 5 pour acheter de la nourriture." << endl;
-            cout << "\nTapez 6 pour passer au mois suivant !" << endl;
-            cout << "\nChoix : ";
-            cin >> Action_Choice;
-        } while (Action_Choice != 1 && Action_Choice != 2 && Action_Choice != 3 && Action_Choice != 4 && Action_Choice != 5 && Action_Choice != 6);
 
-        switch (Action_Choice)
-        {
-        case 1:
-            Evenly_Buy_Habitat();
-            break;
-        case 2:
-            Evenly_Sell_Habitat();
-            break;
-        case 3:
-            Evenly_Buy_Animal();
-            break;
-        case 4:
-            Evenly_Sell_Animal();
-            break;
-        case 5:
-            Evenly_Buy_Food();
-            break;
-
-        default:
-            break;
-        }
+        m_Eagle_Habitats[i].Edit_Age();
     }
 
-    cout << "Mois suivant..." << endl;
-}
+    /**
+     * Tigre
+    */
 
-void Zoo::Update_Month()
-{
-    m_born = 0;
-    Update_All_Animal_Hungry_State();
-    Update_All_Animal_Maladie_State();
-    Update_All_Animal_Reproduction_State();
-    m_Budget.Money_Incomme_By_Visitors(m_month, Total_Animal(2, false), Total_Animal(3, false), Total_Animal(1, false));
-    m_Budget.Add_Money_By_Subvention(m_month, Total_Animal(2, false), Total_Animal(3, false));
-    m_month++;
-    m_total_Month++;
+    for (int i = 0; i < m_Tiger_Habitats.size(); i++)
+    {
+
+        m_Tiger_Habitats[i].Edit_Age();
+    }
+
+    /**
+     * Poule
+    */
+
+    for (int i = 0; i < m_Hen_Habitats.size(); i++)
+    {
+
+        m_Hen_Habitats[i].Edit_Age();
+    }
 }
 
 void Zoo::Update_All_Animal_Reproduction_State()
@@ -841,63 +823,70 @@ void Zoo::Update_All_Animal_Maladie_State()
 void Zoo::Update_All_Animal_Hungry_State()
 // Fonction which will update the food state of each animal in a zoo.
 {
+    cout << "On passe par la : 10" << endl;
     for (int i = 0; i < 31; i++)
     {
         for (int i = 0; i < m_Eagle_Habitats.size(); i++)
         {
-            std::vector<Aigle> Current_Habitat = m_Eagle_Habitats[i].Get_All_Animals();
-            for (int Curr_Animal = 0; Curr_Animal < Current_Habitat.size(); Curr_Animal++)
+            cout << "On passe par la : 11" << endl;
+            std::vector<Aigle> Current_Eagle_Habitat = m_Eagle_Habitats[i].Get_All_Animals();
+            cout << Current_Eagle_Habitat.size() << endl;
+            cout << "On passe par la : 12" << endl;
+            for (int Curr_Animal = 0; Curr_Animal < Current_Eagle_Habitat.size(); Curr_Animal++)
             {
-                // string Current_Type_Food = Current_Habitat[Curr_Animal].Get_Type_Of_Food();
-                float Current_Quantity = Current_Habitat[Curr_Animal].Get_Food_Quantity();
+                // string Current_Type_Food = Current_Eagle_Habitat[Curr_Animal].Get_Type_Of_Food();
+                float Current_Quantity = Current_Eagle_Habitat[Curr_Animal].Get_Food_Quantity();
 
                 if (m_Viande_Quantity - Current_Quantity > 0)
                 {
                     m_Viande_Quantity -= Current_Quantity;
-                    Current_Habitat[Curr_Animal].Reset_Hungry();
+                    Current_Eagle_Habitat[Curr_Animal].Reset_Hungry();
                 }
                 else
                 {
-                    Current_Habitat[Curr_Animal].Update_Hungry();
+                    if (Current_Eagle_Habitat[Curr_Animal].Update_Hungry())
+                    {
+                        m_Eagle_Habitats[i].Delete_Animal(Current_Eagle_Habitat[Curr_Animal].Get_ID());
+                    }
                 }
             }
         }
 
         for (int i = 0; i < m_Tiger_Habitats.size(); i++)
         {
-            std::vector<Tigre> Current_Habitat = m_Tiger_Habitats[i].Get_All_Animals();
-            for (int Curr_Animal = 0; Curr_Animal < Current_Habitat.size(); Curr_Animal++)
+            std::vector<Tigre> Current_Tiger_Habitat = m_Tiger_Habitats[i].Get_All_Animals();
+            for (int Curr_Animal = 0; Curr_Animal < Current_Tiger_Habitat.size(); Curr_Animal++)
             {
-                // string Current_Type_Food = Current_Habitat[Curr_Animal].Get_Type_Of_Food();
-                float Current_Quantity = Current_Habitat[Curr_Animal].Get_Food_Quantity();
+                // string Current_Type_Food = Current_Tiger_Habitat[Curr_Animal].Get_Type_Of_Food();
+                float Current_Quantity = Current_Tiger_Habitat[Curr_Animal].Get_Food_Quantity();
 
                 if (m_Viande_Quantity - Current_Quantity > 0)
                 {
                     m_Viande_Quantity -= Current_Quantity;
-                    Current_Habitat[Curr_Animal].Reset_Hungry();
+                    Current_Tiger_Habitat[Curr_Animal].Reset_Hungry();
                 }
                 else
                 {
-                    Current_Habitat[Curr_Animal].Update_Hungry();
+                    Current_Tiger_Habitat[Curr_Animal].Update_Hungry();
                 }
             }
         }
 
         for (int i = 0; i < m_Eagle_Habitats.size(); i++)
         {
-            std::vector<Poule> Current_Habitat = m_Hen_Habitats[i].Get_All_Animals();
-            for (int Curr_Animal = 0; Curr_Animal < Current_Habitat.size(); Curr_Animal++)
+            std::vector<Poule> Current_Hen_Habitat = m_Hen_Habitats[i].Get_All_Animals();
+            for (int Curr_Animal = 0; Curr_Animal < Current_Hen_Habitat.size(); Curr_Animal++)
             {
-                float Current_Quantity = Current_Habitat[Curr_Animal].Get_Food_Quantity();
+                float Current_Quantity = Current_Hen_Habitat[Curr_Animal].Get_Food_Quantity();
 
                 if (m_Graine_Quantity - Current_Quantity > 0)
                 {
                     m_Graine_Quantity -= Current_Quantity;
-                    Current_Habitat[Curr_Animal].Reset_Hungry();
+                    Current_Hen_Habitat[Curr_Animal].Reset_Hungry();
                 }
                 else
                 {
-                    Current_Habitat[Curr_Animal].Update_Hungry();
+                    Current_Hen_Habitat[Curr_Animal].Update_Hungry();
                 }
             }
         }
@@ -910,7 +899,7 @@ int Zoo::Total_Animal(int type, bool Visible)
         The visible boolean will check if the function have only to return the visible animal                                                                     
         (animals who are not in reproduction)  */
 
-    int count;
+    int count = 0;
     switch (type)
     {
     case 1:
@@ -981,27 +970,11 @@ void Zoo::Evenly_Tidy_Animal()
         break;
     }
 }
-// Notifications
-// Habitat ==> Ranger les animeaux
-// Evenement exceptionnel
-// Gérer les erreurs dans les cin
-// Commenter un peu le programme
-
-void Zoo::Game_Loop()
-{
-    int continues;
-    while (continues != 1 && !m_Budget.Get_Bankrupt())
-    {
-        Notification();
-        Turn_Menu();
-        Update_Month();
-    }
-}
 
 void Zoo::Notification()
 {
     cout << "Rebonjour " << m_nickname << ", voici le rapport de ce mois ci sur notre " << m_Zoo_nickname;
-    cout << "Votre solde est de " << m_Budget.Get_Capital() << "euros" << endl
+    cout << "Votre solde est de  : " << m_Budget.Get_Capital() << " euros" << endl
          << endl;
     cout << "Votre nombre d'aigle : " << Total_Animal(1, false) << endl;
     cout << "Votre nombre de tigre : " << Total_Animal(2, false) << endl;
@@ -1010,10 +983,101 @@ void Zoo::Notification()
     cout << "Votre nombre d'habitat aigle : " << m_Eagle_Habitats.size() << endl;
     cout << "Votre nombre d'habitat tigre : " << m_Tiger_Habitats.size() << endl;
     cout << "Votre nombre d'habitat poule : " << m_Hen_Habitats.size() << endl;
-    cout << "Nombre d'animaux nouveau " << m_born << endl;
-    cout << "Budget actuel : " << m_Budget.Get_Capital();
+    cout << "Nombre d'animaux nouveau  : " << m_born << endl;
+    cout << "Budget actuel : " << m_Budget.Get_Capital() << endl;
+    ;
     cout << "Voici l'etat de tout vos animaux :" << endl
          << endl
          << endl;
     Print_All_Animals();
 }
+
+void Zoo::Turn_Menu()
+{
+    // . Informer l'utilisateur des news de son zoo !
+    int Action_Choice;
+    cout << "\nQue souhaitez-vous faire maintenant ? " << endl;
+
+    while (Action_Choice != 6)
+    {
+        do
+        {
+            cout << endl;
+            cout << "\nTapez 1 pour acheter un habitat." << endl;
+            cout << "\nTapez 2 pour vendre un habitat." << endl;
+            cout << "\nTapez 3 pour acheter un animal." << endl;
+            cout << "\nTapez 4 pour vendre un animal." << endl;
+            cout << "\nTapez 5 pour acheter de la nourriture." << endl;
+            cout << "\nTapez 6 pour passer au mois suivant !" << endl;
+            cout << "\nChoix : ";
+            cin >> Action_Choice;
+        } while (Action_Choice != 1 && Action_Choice != 2 && Action_Choice != 3 && Action_Choice != 4 && Action_Choice != 5 && Action_Choice != 6);
+
+        switch (Action_Choice)
+        {
+        case 1:
+            Evenly_Buy_Habitat();
+            break;
+        case 2:
+            Evenly_Sell_Habitat();
+            break;
+        case 3:
+            Evenly_Buy_Animal();
+            break;
+        case 4:
+            Evenly_Sell_Animal();
+            break;
+        case 5:
+            Evenly_Buy_Food();
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    cout << "Mois suivant..." << endl;
+}
+
+void Zoo::Update_Month()
+{
+    m_born = 0;
+    // cout << "On passe aussi par la !  : 1" << endl;
+    // cout << "On passe aussi par la !  : 2" << endl;
+    // cout << "On passe aussi par la !  : 3" << endl;
+    // cout << "On passe aussi par la !  : 4" << endl;
+    // cout << "On passe aussi par la !  : 5" << endl;
+    // cout << "On passe aussi par la !  : 6" << endl;
+    // cout << "On passe aussi par la !  : 7" << endl;
+    // cout << "On passe aussi par la !  : 8" << endl;
+    Update_All_Animal_Hungry_State();
+    Update_All_Animal_Maladie_State();
+    Update_All_Animal_Reproduction_State();
+    Update_All_Animal_Age_State();
+    m_Budget.Money_Incomme_By_Visitors(m_month, Total_Animal(2, false), Total_Animal(3, false), Total_Animal(1, false));
+    m_Budget.Add_Money_By_Subvention(m_month, Total_Animal(2, false), Total_Animal(3, false));
+    m_month++;
+    m_total_Month++;
+}
+
+void Zoo::Game_Loop()
+{
+    int continues = 1;
+    while (continues == 1 && !m_Budget.Get_Bankrupt())
+    {
+        Notification();
+        Turn_Menu();
+        // cout << continues << m_Budget.Get_Bankrupt() << endl;
+        cout << "On passse par la ! " << endl;
+        Update_Month();
+        cout << "Avant de changer de mois, voulez vous continuer le jeu ?" << endl;
+        cout << "Tapez 1 pour continuer, 2 pour arreter : ";
+        cin >> continues;
+    }
+}
+
+// Notifications
+// Habitat ==> Ranger les animeaux
+// Evenement exceptionnel
+// Gérer les erreurs dans les cin
+// Commenter un peu le programme

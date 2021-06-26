@@ -62,7 +62,7 @@ public:
     Animal(bool gender, int age);
     bool Get_Gender();
     void UpdateState();
-    void Update_Hungry();
+    bool Update_Hungry();
     bool Update_Malade(bool Is_Surpopulation);
     bool Update_Reproduction();
     void Reset_Reproduction();

@@ -6,7 +6,7 @@
 
 // Prepare random enironnment
 std::default_random_engine re(time(0));             // Depend of time to simulate random tirage
-std::uniform_int_distribution<int> distrib{0, 100}; // Number can be between 0 and 100
+std::uniform_int_distribution<int> distrib{0, 100}; // Number can be between 0 and 100  
 // -----------------------------------------------------------------------------------
 
 Animal::Animal(/* args */)
@@ -92,14 +92,16 @@ bool Animal::Update_Malade(bool Is_Surpopulation)
 
 */
 
-void Animal::Update_Hungry()
+bool Animal::Update_Hungry()
 {
+    // return true if the animal will die
     m_State.s_Hungry.Days_Without_Food += 1;
 
     if (m_State.s_Hungry.Is_Hungry && m_State.s_Hungry.Days_Without_Food == m_State.s_Hungry.Max_Days * 2) // for instance 10 days to be hungry, and 20 to died.
     {
         // * Remove the Animal
         std::cout << "Votre Animal est mort de faim ! " << std::endl;
+        return true;
     }
     else
     {
@@ -108,7 +110,9 @@ void Animal::Update_Hungry()
             std::cout << "Votre Animal a faim ! " << std::endl;
             m_State.s_Hungry.Is_Hungry = true; // Animal are Hungry
         }
+        
     }
+    return false;
 }
 
 void Animal::Reset_Hungry()

@@ -54,10 +54,11 @@ class Eagle_Habitat : public Habitat
 {
 private:
     int m_ID;
-    std::vector<Aigle> m_Current_Habitat = std::vector<Aigle>(5);
+    std::vector<Aigle> m_Current_Habitat = std::vector<Aigle>(0);
 
 public:
     Eagle_Habitat(/* args */);
+    Eagle_Habitat(int ID);
     ~Eagle_Habitat();
     Animal_Sell Delete_Animal(int ID);
     bool Add_Animal_In_Habitat(Aigle Current_Animal);
@@ -69,6 +70,7 @@ public:
     void Edit_Maladie();
     void Edit_Food();
     void Born(int New_ID);
+    void Edit_Age();
 };
 
 /*
@@ -85,9 +87,10 @@ class Tiger_Habitat : public Habitat
 {
 private:
     int m_ID;
-    std::vector<Tigre> m_Current_Habitat = std::vector<Tigre>(3);
+    std::vector<Tigre> m_Current_Habitat = std::vector<Tigre>(0);
 public:
     Tiger_Habitat();
+    Tiger_Habitat(int ID);
     ~Tiger_Habitat();
     Animal_Sell Delete_Animal(int ID);
     bool Add_Animal_In_Habitat(Tigre Current_Animal);
@@ -98,6 +101,7 @@ public:
     void Edit_Reproduce();
     void Edit_Maladie();
     void Born(int New_ID);
+    void Edit_Age();
 };
 
 /*
@@ -114,10 +118,11 @@ class Hen_Habitat : public Habitat
 {
 private:
     int m_ID;
-    std::vector<Poule> m_Current_Habitat = std::vector<Poule>(11);
+    std::vector<Poule> m_Current_Habitat = std::vector<Poule>(0);
 
 public:
     Hen_Habitat();
+    Hen_Habitat(int ID);
     ~Hen_Habitat();
     Animal_Sell Delete_Animal(int ID);
     bool Add_Animal_In_Habitat(Poule Current_Animal);
@@ -128,6 +133,7 @@ public:
     void Edit_Reproduce();
     void Edit_Maladie();
     void Born(int New_ID);
+    void Edit_Age();
 };
 
 #endif
