@@ -18,7 +18,6 @@ struct Malade
 
 struct Hungry
 {   
-    int Days_Without_Food = 0;
     bool Is_Hungry = false;
     int Max_Days; // The Max_Days variable means if the Hungry period (=days) exceeds the value, the Animals die
 };
@@ -55,7 +54,7 @@ protected:
     string m_Type_Of_Food; // Graine or viande
     float m_Food_Quantity; // Quantity of consommation food in kg
     State m_State;         // The state of the animal (hungry, malade, reproduction, Age...)
-
+    int m_Days_Without_Food = 0;
 public:
     Animal();
     ~Animal();

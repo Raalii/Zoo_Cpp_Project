@@ -6,15 +6,15 @@
 
 // Prepare random enironnment
 std::default_random_engine re(time(0));             // Depend of time to simulate random tirage
-std::uniform_int_distribution<int> distrib{0, 100}; // Number can be between 0 and 100  
+std::uniform_int_distribution<int> distrib{0, 100}; // Number can be between 0 and 100
 // -----------------------------------------------------------------------------------
 
-Animal::Animal(/* args */)
+Animal::Animal(/* args */) : m_Days_Without_Food(0)
 {
 }
 
 // overload the constructor
-Animal::Animal(bool gender, int age) : m_Gender(gender)
+Animal::Animal(bool gender, int age) : m_Gender(gender), m_Days_Without_Food(0)
 {
     m_State.s_Age.Current_Age = age;
 }
@@ -92,12 +92,15 @@ bool Animal::Update_Malade(bool Is_Surpopulation)
 
 */
 
+
+
 bool Animal::Update_Hungry()
 {
     // return true if the animal will die
-    m_State.s_Hungry.Days_Without_Food += 1;
-
-    if (m_State.s_Hungry.Is_Hungry && m_State.s_Hungry.Days_Without_Food == m_State.s_Hungry.Max_Days * 2) // for instance 10 days to be hungry, and 20 to died.
+    m_Days_Without_Food++;
+    std::cout << m_Days_Without_Food << std::endl;
+    
+    if (m_State.s_Hungry.Is_Hungry && m_Days_Without_Food == m_State.s_Hungry.Max_Days * 2) // for instance 10 days to be hungry, and 20 to died.
     {
         // * Remove the Animal
         std::cout << "Votre Animal est mort de faim ! " << std::endl;
@@ -105,20 +108,22 @@ bool Animal::Update_Hungry()
     }
     else
     {
-        if (m_State.s_Hungry.Days_Without_Food == m_State.s_Hungry.Max_Days) // If the days before the hungry state are atteigned
+        std::cout << "On casse la dalle ici !  : " << m_Days_Without_Food << std::endl;
+        if (m_Days_Without_Food == m_State.s_Hungry.Max_Days) // If the days before the hungry state are atteigned
         {
             std::cout << "Votre Animal a faim ! " << std::endl;
             m_State.s_Hungry.Is_Hungry = true; // Animal are Hungry
         }
-        
     }
+
+      
     return false;
 }
 
 void Animal::Reset_Hungry()
 {
     m_State.s_Hungry.Is_Hungry = false;
-    m_State.s_Hungry.Days_Without_Food = 0;
+    m_Days_Without_Food = 0;
 }
 
 string Animal::Get_Type_Of_Food()

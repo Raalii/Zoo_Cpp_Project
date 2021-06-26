@@ -1,6 +1,11 @@
 #include "./includes/zoo.h"
 #include <string>
 #include <iostream>
+#include <cstdlib>
+
+
+std::default_random_engine re2(time(0));             // Depend of time to simulate random tirage
+std::uniform_int_distribution<int> distrib2{0, 100}; // Number can be between 0 and 100
 
 using std::cin;
 using std::cout;
@@ -22,7 +27,7 @@ void Zoo::Menu()
     string zoo_name;
     int number_of_round = 1;
 
-    // system("cls");
+    system("cls");
     cout << "*******************************" << endl;
     cout << "      	    ZOOLAND           " << endl;
     cout << "*******************************" << endl;
@@ -38,7 +43,10 @@ void Zoo::Menu()
         cout << "\nTapez 1: Lancez une partie." << endl;
         cout << "\nTapez 2: Fermez le programme.\n"
              << endl;
-        cin >> choice;
+      
+                 cin >> choice;
+             
+        
     } while (choice != "1" && choice != "2");
 
     if (choice == "1")
@@ -63,6 +71,7 @@ void Zoo::Menu()
     {
         cout << "Le jeu est annule ! " << endl;
         // leave the game
+        exit(1);
     }
 }
 
@@ -823,7 +832,7 @@ void Zoo::Update_All_Animal_Maladie_State()
 void Zoo::Update_All_Animal_Hungry_State()
 // Fonction which will update the food state of each animal in a zoo.
 {
-    cout << "On passe par la : 10" << endl;
+    // cout << "On passe par la : 10" << endl;
     for (int i = 0; i < 31; i++)
     {
         for (int i = 0; i < m_Eagle_Habitats.size(); i++)
@@ -838,10 +847,15 @@ void Zoo::Update_All_Animal_Hungry_State()
                 {
                     m_Viande_Quantity -= Current_Quantity;
                     Current_Eagle_Habitat[Curr_Animal].Reset_Hungry();
+                    cout << "On graille sa mere la" << endl;
                 }
                 else
                 {
-                    Current_Eagle_Habitat[Curr_Animal].Update_Hungry();
+                    if (Current_Eagle_Habitat[Curr_Animal].Update_Hungry())
+                    {
+                        m_Eagle_Habitats[i].Delete_Animal(Current_Eagle_Habitat[Curr_Animal].Get_ID());
+                        cout << "Un animal est mort de faim" << endl;
+                    }
                 }
             }
         }
@@ -862,6 +876,11 @@ void Zoo::Update_All_Animal_Hungry_State()
                 else
                 {
                     Current_Tiger_Habitat[Curr_Animal].Update_Hungry();
+                    if (Current_Tiger_Habitat[Curr_Animal].Update_Hungry())
+                    {
+                        m_Eagle_Habitats[i].Delete_Animal(Current_Tiger_Habitat[Curr_Animal].Get_ID());
+                        cout << "Un animal est mort de faim" << endl;
+                    }
                 }
             }
         }
@@ -882,6 +901,11 @@ void Zoo::Update_All_Animal_Hungry_State()
                 else
                 {
                     Current_Hen_Habitat[Curr_Animal].Update_Hungry();
+                    if (Current_Hen_Habitat[Curr_Animal].Update_Hungry())
+                    {
+                        m_Eagle_Habitats[i].Delete_Animal(Current_Hen_Habitat[Curr_Animal].Get_ID());
+                        cout << "Un animal est mort de faim" << endl;
+                    }
                 }
             }
         }
@@ -1064,6 +1088,7 @@ void Zoo::Update_Month()
     }
 
     m_total_Month++;
+    Exceptionnal_Event();
 }
 
 void Zoo::Game_Loop()
@@ -1080,10 +1105,98 @@ void Zoo::Game_Loop()
         cout << "Tapez 1 pour continuer,\n Tapez 2 pour arreter : ";
         cin >> continues;
     }
+
+    if (m_Budget.Get_Bankrupt())
+    {
+        cout << "\n\n\nVous avez perdu ! Vous etes en faillite ! " << endl;
+        cout << "\nA la prochaine ! " << endl;
+    }
+    
 }
 
-// Notifications
+void Zoo::Exceptionnal_Event()
+{
+    if (distrib2(re2) < 1) // Incendie
+    {
+        cout << "Un incendie est parvenue ce mois-ci !" << endl;
+        if (m_Eagle_Habitats.size() != 0)
+        {
+            m_Eagle_Habitats.pop_back();
+            cout << "Vous perdez un habitat aigle, ainsi que tout ses animaux" << endl;
+        }
+        else if (m_Tiger_Habitats.size() != 0)
+        {
+            m_Tiger_Habitats.pop_back();
+            cout << "Vous perdez un habitat Tigre, ainsi que tout ses animaux" << endl;
+        }
+        else if (m_Hen_Habitats.size() != 0)
+        {
+            m_Hen_Habitats.pop_back();
+            cout << "Vous perdez un habitat Poule, ainsi que tout ses animaux" << endl;
+        }
+    }
+    else if (distrib2(re2) < 1)
+    {
+        /**
+     * Aigle 
+    */
+        for (int i = 0; i < m_Eagle_Habitats.size(); i++)
+        {
+
+            std::vector<Aigle> Current_Eagle_Habitat = m_Eagle_Habitats[i].Get_All_Animals();
+            if (Current_Eagle_Habitat.size() > 0)
+            {
+                Current_Eagle_Habitat.pop_back();
+                cout << "Un vol a ete effectue dans votre zoo ! vous perdez un aigle ! " << endl;
+                return;
+            }
+        }
+
+        /**
+     * Tigre
+    */
+
+        for (int i = 0; i < m_Tiger_Habitats.size(); i++)
+        {
+
+            std::vector<Tigre> Current_Tiger_Habitat = m_Tiger_Habitats[i].Get_All_Animals();
+            if (Current_Tiger_Habitat.size() > 0)
+            {
+                Current_Tiger_Habitat.pop_back();
+                cout << "Un vol a ete effectue dans votre zoo ! vous perdez un tigre ! " << endl;
+                return;
+            }
+        }
+
+        /**
+     * Poule
+    */
+
+        for (int i = 0; i < m_Hen_Habitats.size(); i++)
+        {
+
+            std::vector<Poule> Current_Hen_Habitat = m_Hen_Habitats[i].Get_All_Animals();
+            if (Current_Hen_Habitat.size() > 0)
+            {
+                Current_Hen_Habitat.pop_back();
+                cout << "Un vol a ete effectue dans votre zoo ! vous perdez une poule ! " << endl;
+                return;
+            }
+        }
+    }
+    else if (distrib2(re2) < 20)
+    {
+        m_Graine_Quantity /= 1.1;
+        cout << "Des nuisibles vous ont fait perdre 10\% de votre stock de graine" << endl;
+    }
+    else if (distrib2(re2) < 10)
+    {
+        m_Viande_Quantity /= 1.2;
+        cout << "Certaines viandes avariees vous ont fait perdre 20\% de votre stock de viande" << endl;
+    }
+}
+
 // Habitat ==> Ranger les animeaux
-// Evenement exceptionnel
+// Regler le problème de faim
 // Gérer les erreurs dans les cin
 // Commenter un peu le programme

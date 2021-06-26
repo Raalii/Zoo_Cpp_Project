@@ -67,6 +67,7 @@ public:
     void Turn_Menu();
     void Notification();
     void Update_All_Animal_Age_State();
+    void Exceptionnal_Event();
 };
 
 #endif
