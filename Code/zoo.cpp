@@ -851,6 +851,7 @@ void Zoo::Update_All_Animal_Hungry_State()
                 }
                 else
                 {
+                    Current_Eagle_Habitat[Curr_Animal].Increment_Days_Without_Food();
                     if (Current_Eagle_Habitat[Curr_Animal].Update_Hungry())
                     {
                         m_Eagle_Habitats[i].Delete_Animal(Current_Eagle_Habitat[Curr_Animal].Get_ID());

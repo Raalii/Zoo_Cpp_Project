@@ -421,7 +421,7 @@ void Hen_Habitat::Born(int New_ID) {
     Poule baby(1 == male_or_female(new_re), 1, New_ID);
     if (new_distrib(new_re) < 50)
     {
-        std::cout << "le bebe a malheuresement peri !" << std::endl;
+        std::cout << "Le bebe a malheuresement peri !" << std::endl;
     } else {
         std::cout << "le bebe tigre est enfin nee !" << std::endl;
         Add_Animal_In_Habitat(baby);

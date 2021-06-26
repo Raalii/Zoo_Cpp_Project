@@ -92,12 +92,13 @@ bool Animal::Update_Malade(bool Is_Surpopulation)
 
 */
 
-
+void Animal::Increment_Days_Without_Food() {
+    m_Days_Without_Food++;
+}
 
 bool Animal::Update_Hungry()
 {
     // return true if the animal will die
-    m_Days_Without_Food++;
     std::cout << m_Days_Without_Food << std::endl;
     
     if (m_State.s_Hungry.Is_Hungry && m_Days_Without_Food == m_State.s_Hungry.Max_Days * 2) // for instance 10 days to be hungry, and 20 to died.
@@ -108,7 +109,7 @@ bool Animal::Update_Hungry()
     }
     else
     {
-        std::cout << "On casse la dalle ici !  : " << m_Days_Without_Food << std::endl;
+        std::cout << m_Days_Without_Food << std::endl;
         if (m_Days_Without_Food == m_State.s_Hungry.Max_Days) // If the days before the hungry state are atteigned
         {
             std::cout << "Votre Animal a faim ! " << std::endl;

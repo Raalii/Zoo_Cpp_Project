@@ -74,6 +74,7 @@ public:
     float Get_Food_Quantity();
     void Update_Age();
     void Start_Reproduction();
+    void Increment_Days_Without_Food();
 };
 
 
